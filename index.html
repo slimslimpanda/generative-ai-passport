@@ -19,6 +19,7 @@
         .container {
             max-width: 600px;
             width: 100%;
+            max-height: 90%;
             background: white;
             border-radius: 20px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
@@ -182,6 +183,10 @@
             </div>
             <div class="card-back">
                 <div class="definition" id="definitionText"></div>
+                <div class="link">
+                    <br>
+                    <a id="linkText" href="#" target="_blank">参考URL</a>
+                </div>
                 <div class="hint">カードをクリックして単語に戻る</div>
             </div>
         </div>
@@ -199,854 +204,1126 @@
         // 生成AIパスポート試験の用語データ
         const flashcards = [
             {
-                "chapter": "AI(人工知能)",
+                "chapter": "第1章 AI(人工知能)",
                 "term": "AI(人工知能)",
-                "definition": "人工的に人間の知能を再現しようとする技術やシステム、またはそれによって実現される知的な能力そのもの。"
+                "definition": "明確な定義は存在しないが、「大量の知識データに対して、高度な推論を的確に行うことを目指したもの」とされている。",
+                "link": "https://ja.wikipedia.org/wiki/%E4%BA%BA%E5%B7%A5%E7%9F%A5%E8%83%BD"
             },
             {
-                "chapter": "AI(人工知能)",
+                "chapter": "第1章 AI(人工知能)",
                 "term": "ダートマス会議",
-                "definition": "1956年にアメリカのダートマス大学で開催された、人工知能という言葉が初めて使われ、AI研究の出発点となった会議。"
+                "definition": "1956年の夏にアメリカのダートマス大学で開催された、人工知能という言葉が初めて使われ、AI研究が本格的に始まったとされる会議。",
+                "link": "https://ja.wikipedia.org/wiki/%E3%83%80%E3%83%BC%E3%83%88%E3%83%9E%E3%82%B9%E4%BC%9A%E8%AD%B0"
             },
             {
-                "chapter": "AI(人工知能)",
+                "chapter": "第1章 AI(人工知能)",
                 "term": "ルールベース",
-                "definition": "あらかじめ設定されたルールに基づいて意思決定や処理を行うAIの仕組み。エキスパートシステムなどで用いられる。"
+                "definition": "あらかじめ設定されたルールに基づいて意思決定や処理を行うシステム。条件と行動のペアで構成される。",
+                "link": "https://e-words.jp/w/%E3%83%AB%E3%83%BC%E3%83%AB%E3%83%99%E3%83%BC%E3%82%B9%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0.html"
             },
             {
-                "chapter": "AI(人工知能)",
+                "chapter": "第1章 AI(人工知能)",
                 "term": "機械学習",
-                "definition": "データからパターンや規則性を学習し、それに基づいて予測や判断を行うAIの手法。明示的なプログラミングなしに学習できる。"
+                "definition": "AIの一分野で、データからパターンを学習し、予測や意思決定を行う技術。明示的にプログラムされなくても、データに基づいて性能を向上させる。",
+                "link": "https://ja.wikipedia.org/wiki/%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92"
             },
             {
-                "chapter": "AI(人工知能)",
+                "chapter": "第1章 AI(人工知能)",
                 "term": "学習済みモデル",
-                "definition": "機械学習によって訓練され、特定のタスクを実行できるように学習が完了したAIモデル。"
+                "definition": "機械学習アルゴリズムがデータから学習した結果として得られるモデル。このモデルは、新たなデータに対して予測や分類を行うために利用できる。",
+                "link": "https://www.ml-engineer.jp/articles/how-to-use-ml-model/"
             },
             {
-                "chapter": "AI(人工知能)",
+                "chapter": "第1章 AI(人工知能)",
                 "term": "教師あり学習",
-                "definition": "正解のデータ（教師データ）を与えてモデルを学習させる機械学習の手法。分類や回帰問題に用いられる。"
+                "definition": "正解ラベルが付与されたデータ（教師データ）を用いてモデルを学習させる機械学習の手法。分類や回帰問題に用いられる。",
+                "link": "https://ja.wikipedia.org/wiki/%E6%95%99%E5%B8%AB%E3%81%82%E3%82%8A%E5%AD%A6%E7%BF%92"
             },
             {
-                "chapter": "AI(人工知能)",
+                "chapter": "第1章 AI(人工知能)",
                 "term": "教師なし学習",
-                "definition": "正解のデータを与えずに、データそのものが持つ構造やパターンをモデルに学習させる機械学習の手法。クラスタリングや次元削減に用いられる。"
+                "definition": "正解ラベルがないデータから、データ自身の構造やパターンを発見する機械学習の手法。クラスタリングや次元削減に用いられる。",
+                "link": "https://ja.wikipedia.org/wiki/%E6%95%99%E5%B8%AB%E3%81%AA%E3%81%97%E5%AD%A6%E7%BF%92"
             },
             {
-                "chapter": "AI(人工知能)",
+                "chapter": "第1章 AI(人工知能)",
                 "term": "クラスタリング",
-                "definition": "教師なし学習の一つで、データ内の似たもの同士をグループ（クラスター）にまとめる手法。"
+                "definition": "教師なし学習の一種で、データの中から類似性の高いものを集めてグループ（クラスター）に分割する手法。",
+                "link": "https://ja.wikipedia.org/wiki/%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0"
             },
             {
-                "chapter": "AI(人工知能)",
+                "chapter": "第1章 AI(人工知能)",
                 "term": "次元削減",
-                "definition": "データの持つ特徴量の数を減らすことで、データの構造を保持しつつ、分析や可視化を容易にする手法。"
+                "definition": "データの特徴量を減らすことで、データの構造を保持しつつ、データの複雑さを低減する手法。可視化や計算コスト削減に役立つ。",
+                "link": "https://ja.wikipedia.org/wiki/%E6%AC%A1%E5%85%83%E5%89%8A%E6%B8%9B"
             },
             {
-                "chapter": "AI(人工知能)",
+                "chapter": "第1章 AI(人工知能)",
                 "term": "強化学習",
-                "definition": "AIが環境との相互作用を通じて、試行錯誤しながら最適な行動を学習していく機械学習の手法。報酬を最大化するように学習する。"
+                "definition": "エージェントが環境と相互作用しながら、試行錯誤を通じて最適な行動戦略を学習する機械学習の手法。報酬を最大化するように学習を進める。",
+                "link": "https://ja.wikipedia.org/wiki/%E5%BC%B7%E5%8C%96%E5%AD%A6%E7%BF%92"
             },
             {
-                "chapter": "AI(人工知能)",
+                "chapter": "第1章 AI(人工知能)",
                 "term": "半教師あり学習",
-                "definition": "教師あり学習と教師なし学習を組み合わせた手法で、少量のラベル付きデータと大量のラベルなしデータを用いて学習を行う。"
+                "definition": "教師あり学習と教師なし学習を組み合わせた手法。少量のラベル付きデータと大量のラベルなしデータを利用して学習を行う。",
+                "link": "https://ja.wikipedia.org/wiki/%E5%8D%8A%E6%95%99%E5%B8%AB%E3%81%82%E3%82%8A%E5%AD%A6%E7%BF%92"
             },
             {
-                "chapter": "AI(人工知能)",
+                "chapter": "第1章 AI(人工知能)",
                 "term": "ノーフリーランチ定理",
-                "definition": "いかなる機械学習アルゴリズムも、全ての最適化問題において他のアルゴリズムよりも優れているわけではない、という定理。"
+                "definition": "あらゆる問題に対して万能な機械学習アルゴリズムは存在しないという定理。特定の問題に最適なアルゴリズムは、他の問題では最適な性能を発揮しない可能性があることを示す。",
+                "link": "https://ja.wikipedia.org/wiki/%E3%83%8E%E3%83%BC%E3%83%95%E3%83%AA%E3%83%BC%E3%83%A9%E3%83%B3%E3%83%81%E5%AE%9A%E7%90%86"
             },
             {
-                "chapter": "AI(人工知能)",
+                "chapter": "第1章 AI(人工知能)",
                 "term": "ニューロン",
-                "definition": "脳の神経細胞。人工ニューラルネットワークの基本的な構成要素である「人工ニューロン」のモデル。"
+                "definition": "神経細胞のこと。人工ニューラルネットワークにおける処理単位のモデル。",
+                "link": "https://ja.wikipedia.org/wiki/%E3%83%8B%E3%83%A5%E3%83%BC%E3%83%AD%E3%83%B3"
             },
             {
-                "chapter": "AI(人工知能)",
+                "chapter": "第1章 AI(人工知能)",
                 "term": "シナプス",
-                "definition": "ニューロン間の結合部分。人工ニューラルネットワークでは、この結合の強さを「重み」として表現する。"
+                "definition": "神経細胞間の接合部。人工ニューラルネットワークにおいて、ニューロン間の結合の強さ（重み）に相当する。",
+                "link": "https://ja.wikipedia.org/wiki/%E3%82%B7%E3%83%8A%E3%83%97%E3%82%B9"
             },
             {
-                "chapter": "AI(人工知能)",
+                "chapter": "第1章 AI(人工知能)",
                 "term": "人工ニューロン(ノード)",
-                "definition": "人工ニューラルネットワークの基本的な演算単位。複数の入力信号を受け取り、重み付けされた合計がある閾値を超えると出力信号を発する。"
+                "definition": "人工ニューラルネットワークにおける情報の処理単位。複数の入力信号を受け取り、結合の重みを考慮して、活性化関数を通じて出力信号を生成する。",
+                "link": "https://ja.wikipedia.org/wiki/%E4%BA%BA%E5%B7%A5%E3%83%8B%E3%83%A5%E3%83%BC%E3%83%AD%E3%83%B3"
             },
             {
-                "chapter": "AI(人工知能)",
+                "chapter": "第1章 AI(人工知能)",
                 "term": "ニューラルネットワーク",
-                "definition": "人間の脳の神経回路を模倣した情報処理モデル。多数の人工ニューロンが層状に結合されており、学習によって複雑なパターンを認識できる。"
+                "definition": "人間の脳の神経回路を模倣した情報処理モデル。多数の人工ニューロンが層状に結合されており、学習によって複雑なパターンを認識できる。",
+                "link": "https://ja.wikipedia.org/wiki/%E3%83%8B%E3%83%A5%E3%83%BC%E3%83%A9%E3%83%AB%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF"
             },
             {
-                "chapter": "AI(人工知能)",
+                "chapter": "第1章 AI(人工知能)",
                 "term": "ディープラーニング",
-                "definition": "多層のニューラルネットワークを用いた機械学習の一種。データから自動的に特徴量を抽出し、高い認識精度を実現する。"
+                "definition": "ニューラルネットワークの多層化により、より複雑な特徴表現を自動で学習する機械学習の一分野。深層学習とも呼ばれる。",
+                "link": "https://ja.wikipedia.org/wiki/%E3%83%87%E3%82%A3%E3%83%BC%E3%83%97%E3%83%A9%E3%83%BC%E3%83%8B%E3%83%B3%E3%82%B0"
             },
             {
-                "chapter": "AI(人工知能)",
+                "chapter": "第1章 AI(人工知能)",
                 "term": "重み",
-                "definition": "ニューラルネットワークにおいて、入力信号が次のニューロンに伝わる際の結合の強さを表す数値。学習によって調整される。"
+                "definition": "ニューラルネットワークにおいて、入力信号が次の層のニューロンに伝達される際の結合の強さを示す数値。学習によって調整される。",
+                "link": "https://e-words.jp/w/%E9%87%8D%E3%81%BF.html"
             },
             {
-                "chapter": "AI(人工知能)",
+                "chapter": "第1章 AI(人工知能)",
                 "term": "情報の重みづけ",
-                "definition": "ニューラルネットワークにおいて、各入力情報に対して重要度を数値化すること。重みが大きいほど、その情報が結果に与える影響が大きい。"
+                "definition": "入力された情報に対して、その重要度に応じて異なる重み（係数）を乗じること。これにより、モデルは重要な情報に焦点を当てて学習できる。",
+                "link": "https://ledge.ai/deep-learning-tips-and-tricks/"
             },
             {
-                "chapter": "AI(人工 Orchestration)",
+                "chapter": "第1章 AI(人工知能)",
                 "term": "過学習",
-                "definition": "機械学習モデルが訓練データに過度に適応しすぎた結果、未知のデータに対しては性能が著しく低下する現象。"
+                "definition": "機械学習モデルが訓練データに過度に適合しすぎた結果、未知のデータに対しては性能が著しく低下してしまう現象。",
+                "link": "https://ja.wikipedia.org/wiki/%E9%81%8E%E5%AD%A6%E7%BF%92"
             },
             {
-                "chapter": "AI(人工知能)",
+                "chapter": "第1章 AI(人工知能)",
                 "term": "正則化",
-                "definition": "過学習を防ぐために、モデルの複雑さを制限する手法。重みを小さくしたり、不要な特徴量を抑制したりする。"
+                "definition": "過学習を防ぐために、モデルの複雑さを制限する手法。モデルの重みが大きくなりすぎることを抑制する役割がある。",
+                "link": "https://ja.wikipedia.org/wiki/%E6%AD%A3%E5%89%87%E5%8C%96"
             },
             {
-                "chapter": "AI(人工知能)",
+                "chapter": "第1章 AI(人工知能)",
                 "term": "ドロップアウト",
-                "definition": "ニューラルネットワークの過学習を防ぐ手法の一つで、学習時にランダムに一部のニューロンを無効にすることで、汎化性能を高める。"
+                "definition": "ニューラルネットワークの過学習を防ぐための正則化手法の一つ。学習時にランダムに一部のニューロンを無効化することで、モデルの汎化能力を高める。",
+                "link": "https://ja.wikipedia.org/wiki/%E3%83%89%E3%83%AD%E3%83%83%E3%83%97%E3%82%A2%E3%82%A6%E3%83%88_(%E3%83%8B%E3%83%A5%E3%83%BC%E3%83%A9%E3%83%AB%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF)"
             },
             {
-                "chapter": "AI(人工知能)",
+                "chapter": "第1章 AI(人工知能)",
                 "term": "転移学習",
-                "definition": "あるタスクで学習済みのモデルを、別の関連するタスクに再利用する機械学習の手法。ゼロから学習するよりも効率的で、少ないデータで高い性能を達成できる。"
+                "definition": "あるタスクで学習済みのモデルを、別の関連するタスクに転用して学習させる手法。少ないデータで効率的に学習を進めることができる。",
+                "link": "https://ja.wikipedia.org/wiki/%E8%BB%A2%E7%A7%BB%E5%AD%A6%E7%BF%92"
             },
             {
-                "chapter": "AI(人工知能)",
+                "chapter": "第1章 AI(人工知能)",
                 "term": "特徴量",
-                "definition": "データから抽出され、機械学習モデルの入力として使われる、そのデータの特性を表す数値やカテゴリ。"
+                "definition": "機械学習において、データが持つ特性や情報を数値で表現したもの。モデルの学習に用いられる入力データとなる。",
+                "link": "https://ja.wikipedia.org/wiki/%E7%89%B9%E5%BE%B4%E9%87%8F"
             },
             {
-                "chapter": "AI(人工知能)",
+                "chapter": "第1章 AI(人工知能)",
                 "term": "弱いAI (ANI)",
-                "definition": "特定のタスクに特化して設計されたAI。現在のAIのほとんどがこれに該当する。（例：画像認識AI、翻訳AIなど）"
+                "definition": "特定のタスクに特化して高い性能を発揮するAI。現在のAIのほとんどがこれに該当する。（例：画像認識、音声認識）",
+                "link": "https://ja.wikipedia.org/wiki/%E5%BC%B1%E3%81%84AI"
             },
             {
-                "chapter": "AI(人工知能)",
+                "chapter": "第1章 AI(人工知能)",
                 "term": "強いAI (AGI)",
-                "definition": "人間と同じように幅広いタスクをこなせる汎用的な知能を持つAI。まだ実現されていない概念。"
+                "definition": "人間のように多様なタスクをこなし、自律的に学習・思考・問題解決ができる汎用的なAI。まだ実現されていない概念。",
+                "link": "https://ja.wikipedia.org/wiki/%E5%BC%B7%E3%81%84AI"
             },
             {
-                "chapter": "AI(人工知能)",
+                "chapter": "第1章 AI(人工知能)",
                 "term": "第一次AIブーム",
-                "definition": "1950年代後半から1960年代にかけてのAI研究の隆盛期。探索や推論といった手法が注目された。"
+                "definition": "1950年代後半から1960年代にかけてのAI研究の初期段階。探索や推論といった記号処理によるAIが中心であった。",
+                "link": "https://ledge.ai/ai-boom-history/"
             },
             {
-                "chapter": "AI(人工知能)",
+                "chapter": "第1章 AI(人工知能)",
                 "term": "探索",
-                "definition": "AIが問題を解決するために、可能な選択肢の中から最適な経路や解を見つけ出すプロセス。"
+                "definition": "AIが問題を解決するために、可能な選択肢の中から最適な経路や解を見つけ出すプロセス。",
+                "link": "https://ja.wikipedia.org/wiki/%E6%8E%A2%E7%B4%A2%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0"
             },
             {
-                "chapter": "AI(人工知能)",
+                "chapter": "第1章 AI(人工知能)",
                 "term": "推論",
-                "definition": "既知の事実やルールに基づいて、新しい事実や結論を導き出すAIの能力。"
+                "definition": "AIが与えられた情報や知識から、論理的な結論を導き出す能力。",
+                "link": "https://ja.wikipedia.org/wiki/%E6%8E%A8%E8%AB%96"
             },
             {
-                "chapter": "AI(人工知能)",
+                "chapter": "第1章 AI(人工知能)",
                 "term": "第二次AIブーム",
-                "definition": "1980年代にエキスパートシステムの登場により起こったAI研究の隆盛期。"
+                "definition": "1980年代に起こったAI研究のブーム。エキスパートシステムが中心となり、特定の分野で専門家のような知識を用いた問題解決が可能になった。",
+                "link": "https://ledge.ai/ai-boom-history/"
             },
             {
-                "chapter": "AI(人工知能)",
+                "chapter": "第1章 AI(人工知能)",
                 "term": "エキスパートシステム",
-                "definition": "特定の専門分野の知識をルールとしてAIに与え、人間のような推論を行うシステム。第二次AIブームの中心となった。"
+                "definition": "人間の専門家の知識や推論過程をコンピュータシステムに実装したAI。特定の専門分野の問題解決に特化する。",
+                "link": "https://ja.wikipedia.org/wiki/%E3%82%A8%E3%82%AD%E3%82%B9%E3%83%91%E3%83%BC%E3%83%88%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0"
             },
             {
-                "chapter": "AI(人工知能)",
+                "chapter": "第1章 AI(人工知能)",
                 "term": "AIの冬",
-                "definition": "AI研究に対する期待が低下し、研究費が削減された時期。過去に何度か経験されている。"
+                "definition": "人工知能研究への資金提供と関心が低下した時期。",
+                "link": "https://ja.wikipedia.org/wiki/AI%E3%81%AE%E5%86%AC"
             },
             {
-                "chapter": "AI(人工知能)",
+                "chapter": "第1章 AI(人工知能)",
                 "term": "第三次AIブーム",
-                "definition": "2000年代後半から現在にかけてのAI研究の隆盛期。ディープラーニングやビッグデータの活用がその特徴。"
+                "definition": "2000年代以降に起こったAI研究のブーム。ビッグデータ、計算能力の向上、ディープラーニングの発展により、AIが実用的な成果を上げ始めた。",
+                "link": "https://ledge.ai/ai-boom-history/"
             },
             {
-                "chapter": "AI(人工知能)",
+                "chapter": "第1章 AI(人工知能)",
                 "term": "ビッグデータ",
-                "definition": "従来のデータ処理システムでは扱うことが困難なほど、大容量で多様な形式のデータ。AIの学習に不可欠な要素。"
+                "definition": "従来のデータ処理システムでは扱いきれないほど巨大で複雑なデータ群。AIの学習において重要な役割を果たす。",
+                "link": "https://ja.wikipedia.org/wiki/%E3%83%93%E3%83%83%E3%82%B0%E3%83%87%E3%83%BC%E3%82%BF"
             },
             {
-                "chapter": "AI(人工知能)",
-                "term": "シンギュラリティ(技術的特異点)",
-                "definition": "AIの発展が人間の知能を超え、社会や文明に予測不可能な変化が起こる時点。レイ・カーツワイルが提唱した概念。"
+                "chapter": "第1章 AI(人工知能)",
+                "term": "シンギュラリティ (技術的特異点)",
+                "definition": "人工知能が自己改良を繰り返し、人類の知能を超える時点。これにより、人間の予測を超える技術的、社会的な変化が起こるとされる。",
+                "link": "https://ja.wikipedia.org/wiki/%E6%8A%80%E8%A1%93%E7%9A%84%E7%89%B9%E7%95%B0%E7%82%B9"
             },
             {
-                "chapter": "AI(人工知能)",
+                "chapter": "第1章 AI(人工知能)",
                 "term": "ヴァーナー・ヴィンジ",
-                "definition": "SF作家であり数学者。1993年に「来るべき技術的特異点」という論文を発表し、シンギュラリティの概念を広めた一人。"
+                "definition": "アメリカのSF作家。技術的特異点（シンギュラリティ）の概念を提唱した一人として知られる。",
+                "link": "https://ja.wikipedia.org/wiki/%E3%83%B4%E3%82%A1%E3%83%BC%E3%83%8A%E3%83%BC%E3%83%BB%E3%83%B4%E3%82%A3%E3%83%B3%E3%82%B8"
             },
             {
-                "chapter": "AI(人工知能)",
+                "chapter": "第1章 AI(人工知能)",
                 "term": "レイ・カーツワイル",
-                "definition": "発明家、未来学者。技術的特異点（シンギュラリティ）の概念を広く知らしめ、その時期を2045年と予測したことで知られる。"
+                "definition": "アメリカの発明家、未来学者。シンギュラリティが2045年頃に到来すると予測したことで知られる。",
+                "link": "https://ja.wikipedia.org/wiki/%E3%83%AC%E3%82%A4%E3%83%BB%E3%82%AB%E3%83%BC%E3%83%84%E3%83%AF%E3%82%A4%E3%83%AB"
             },
             {
-                "chapter": "AI(人工知能)",
+                "chapter": "第1章 AI(人工知能)",
                 "term": "2045年問題",
-                "definition": "レイ・カーツワイルが提唱した、AIが人間の知能を超える技術的特異点（シンギュラリティ）が2045年頃に到来するという予測。"
+                "definition": "2045年にAIが人類の知能を超える技術的特異点（シンギュラリティ）を迎え、人間が予測不可能な問題が起こり、大きな影響を及ぼすとされている問題。",
+                "link": "https://ja.wikipedia.org/wiki/2045%E5%B9%B4%E問題"
             },
             {
-                "chapter": "AI(人工知能)",
+                "chapter": "第1章 AI(人工知能)",
                 "term": "AI効果",
-                "definition": "AIが達成したことが、その瞬間にAIではなく単なる自動化と見なされ、AIの成果と認識されなくなる現象。AIがより高度な能力を獲得するたびに、その基準が引き上げられる。"
+                "definition": "人工知能が何かを達成するたびに、人間がそれを「知能」ではなく単なる自動化や計算の高速化と見なしてしまう心理的傾向。",
+                "link": "https://ja.wikipedia.org/wiki/AI%E5%8A%B9%E6%9E%9C"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "生成AI (ジェネレーティブAI)",
-                "definition": "学習したデータに基づいて、新しいテキスト、画像、音声などのコンテンツを生成するAIの総称。"
+                "definition": "テキスト、画像、音声などの様々な形式のデータを、既存のデータから学習したパターンに基づいて新たに生成するAIの総称。",
+                "link": "https://ja.wikipedia.org/wiki/%E7%94%9F%E6%88%90AI"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "ボルツマンマシン",
-                "definition": "ニューラルネットワークの一種で、確率的なモデルを用いて学習を行う。生成モデルの基礎となった技術の一つ。"
+                "definition": "深層学習の初期に研究された確率的な生成モデルの一つ。隠れ層を持つニューラルネットワークで、学習によってデータ分布をモデル化する。",
+                "link": "https://ja.wikipedia.org/wiki/%E3%83%9C%E3%83%AB%E3%83%84%E3%83%9E%E3%83%B3%E3%83%9E%E3%82%B7%E3%83%B3"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "制約付きボルツマンマシン",
-                "definition": "ボルツマンマシンの一種で、層間の結合に制限を加えることで、学習を容易にしたモデル。深層学習の初期に用いられた。"
+                "definition": "ボルツマンマシンの変種で、隠れ層間の接続がないことで学習が容易になったモデル。レコメンデーションシステムなどで利用された。",
+                "link": "https://ja.wikipedia.org/wiki/%E5%88%B6%E7%B4%84%E4%BB%B6%E3%81%8D%E3%83%9C%E3%83%AB%E3%83%84%E3%83%9E%E3%83%B3%E3%83%9E%E3%82%B7%E3%83%B3"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "自己回帰モデル",
-                "definition": "時系列データなどにおいて、過去のデータ点に基づいて次のデータ点を予測・生成するモデル。テキスト生成などで用いられる。"
+                "definition": "時系列データやシーケンスデータにおいて、過去のデータ点や前の要素に基づいて次のデータ点や要素を予測・生成するモデル。",
+                "link": "https://ja.wikipedia.org/wiki/%E8%87%AA%E5%B7%B1%E5%9B%9E%E5%B8%B0%E3%83%A2%E3%83%87%E3%83%AB"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "CNN (畳み込みニューラルネットワーク)",
-                "definition": "画像認識や画像生成に特化したニューラルネットワークの一種。畳み込み層によって画像の特徴を効率的に抽出する。"
+                "definition": "画像データなどの空間的なパターン認識に特化したディープラーニングのネットワークアーキテクチャ。畳み込み層とプーリング層を特徴とする。",
+                "link": "https://ja.wikipedia.org/wiki/%E7%95%B3%E3%81%BF%E8%BE%BC%E3%81%BF%E3%83%8B%E3%83%A5%E3%83%BC%E3%83%A9%E3%83%AB%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "畳み込み",
-                "definition": "CNNにおいて、フィルター（カーネル）を使って画像データの特徴を抽出する操作。"
+                "definition": "CNNにおける主要な演算の一つ。フィルター（カーネル）を用いて入力データ（画像など）の特徴を抽出し、特徴マップを生成する操作。",
+                "link": "https://www.weblio.jp/content/%E7%95%B3%E3%81%BF%E8%BE%BC%E3%81%BF"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "VAE (変分自己符号化器)",
-                "definition": "データの生成と圧縮を同時に行うニューラルネットワーク。ノイズを考慮した確率的な生成モデル。"
+                "definition": "データの生成と潜在表現の学習を同時に行う生成モデルの一つ。エンコーダでデータを潜在空間に圧縮し、デコーダでその潜在表現からデータを再構築する。",
+                "link": "https://ja.wikipedia.org/wiki/%E5%A4%89%E5%88%86%E8%87%AA%E5%B7%B1%E7%AC%A6%E5%8F%B7%E5%8C%96%E5%99%A8"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "ノイズ",
-                "definition": "VAEにおいて、潜在空間からデータを生成する際に加えられるランダムな要素。これにより多様なデータを生成できる。"
+                "definition": "信号やデータに混入する不要な成分。VAEでは、潜在空間にノイズを加えることで、生成されるデータの多様性を高める。",
+                "link": "https://ja.wikipedia.org/wiki/%E3%83%8E%E3%82%A4%E3%82%BA"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "エンコーダ",
-                "definition": "VAEにおいて、入力データを潜在ベクトルに圧縮する役割を持つネットワーク。"
+                "definition": "VAEの一部で、入力データをより低次元の潜在空間表現に変換（符号化）する役割を持つニューラルネットワーク。",
+                "link": "https://ja.wikipedia.org/wiki/%E3%82%A8%E3%83%B3%E3%82%B3%E3%83%BC%E3%83%80%E3%83%BC"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "デコーダ",
-                "definition": "VAEにおいて、潜在ベクトルから元のデータを再構築または新しいデータを生成する役割を持つネットワーク。"
+                "definition": "VAEの一部で、潜在空間表現から元のデータ形式に再構築（復号化）する役割を持つニューラルネットワーク。",
+                "link": "https://ja.wikipedia.org/wiki/%E3%83%87%E3%82%B3%E3%83%BC%E3%83%80%E3%83%BC"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "潜在ベクトル",
-                "definition": "VAEにおいて、入力データの特徴を圧縮して表現した低次元のベクトル。潜在空間に存在する。"
+                "definition": "VAEにおいて、入力データの抽象的な特徴や意味を低次元の数値ベクトルとして表現したもの。このベクトルを操作することで新たなデータを生成できる。",
+                "link": "https://ledge.ai/latent-space/"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "GAN (敵対的生成ネットワーク)",
-                "definition": "生成器と識別器の2つのネットワークが敵対的に学習することで、リアルなデータを生成するAIモデル。"
+                "definition": "生成器（Generator）と識別器（Discriminator）という2つのネットワークが互いに競い合いながら学習することで、リアルなデータを生成するモデル。",
+                "link": "https://ja.wikipedia.org/wiki/%E6%95%B5%E5%AF%BE%E7%9A%84%E7%94%9F%E6%88%90%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "生成器",
-                "definition": "GANにおいて、偽のデータを生成する役割を持つネットワーク。識別器を騙すように学習する。"
+                "definition": "GANの一部で、ランダムなノイズを入力として受け取り、偽のデータ（画像、テキストなど）を生成するネットワーク。",
+                "link": "https://ledge.ai/generative-adversarial-networks/"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "識別器",
-                "definition": "GANにおいて、入力されたデータが本物か偽物かを識別する役割を持つネットワーク。生成器が作った偽物を見破るように学習する。"
+                "definition": "GANの一部で、与えられたデータが本物か偽物か（生成器が作ったものか）を識別するネットワーク。",
+                "link": "https://ledge.ai/generative-adversarial-networks/"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "RNN (回帰型ニューラルネットワーク)",
-                "definition": "時系列データやシーケンスデータを処理するのに適したニューラルネットワーク。前のステップの情報を記憶し、次のステップの処理に利用できる。"
+                "definition": "時系列データやシーケンスデータ（音声、テキストなど）の処理に適したニューラルネットワーク。過去の情報を記憶し、次の出力を予測する。",
+                "link": "https://ja.wikipedia.org/wiki/%E5%9B%9E%E5%B8%B0%E5%9E%8B%E3%83%8B%E3%83%A5%E3%83%BC%E3%83%A9%E3%83%AB%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
-                "term": "隠れ層",
-                "definition": "ニューラルネットワークにおいて、入力層と出力層の間に位置する層。データの複雑なパターンを学習する。"
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
+                "term": "隠れ",
+                "definition": "ニューラルネットワークの入力層と出力層の間に存在する層。ここで複雑な特徴抽出や変換が行われる。",
+                "link": "https://ja.wikipedia.org/wiki/%E3%83%8B%E3%83%A5%E3%83%BC%E3%83%A9%E3%83%AB%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF#%E5%B1%A4"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "リカレント",
-                "definition": "RNNの特性を表す言葉で、ネットワーク内で情報が循環し、過去の情報が保持されることを指す。"
+                "definition": "RNNの特性を指す言葉で、ネットワーク内部に自己ループを持ち、過去の情報を再帰的に利用することを意味する。",
+                "link": "https://ja.wikipedia.org/wiki/%E5%9B%9E%E5%B8%B0%E5%9E%8B%E3%83%8B%E3%83%A5%E3%83%BC%E3%83%A9%E3%83%AB%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "シーケンスデータ",
-                "definition": "順番に意味を持つデータ。テキスト、音声、時系列データなどが該当する。"
+                "definition": "要素が順序を持つデータ。時系列データやテキストデータなどが該当する。",
+                "link": "https://e-words.jp/w/%E3%82%B7%E3%83%BC%E3%82%B1%E3%83%B3%E3%82%B9%E3%83%87%E3%83%BC%E3%82%BF.html"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "LSTM (長・短期記憶)",
-                "definition": "RNNの一種で、長期的な依存関係を学習できる能力を持つ。従来のRNNが抱える勾配消失問題を解決する。"
+                "definition": "RNNの一種で、長期的な依存関係を学習できる能力を持つ。従来のRNNが抱える勾配消失問題を解決するために開発された。",
+                "link": "https://ja.wikipedia.org/wiki/%E9%95%B7%E3%83%BB%E7%9F%AD%E6%9C%9F%E8%A8%98%E6%86%B6"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "Transformerモデル",
-                "definition": "自然言語処理において画期的な成果を上げたニューラルネットワークアーキテクチャ。Attentionメカニズムを主要な要素とする。"
+                "definition": "Attentionメカニズムのみで学習を行うニューラルネットワークのアーキテクチャ。RNNの欠点を克服し、自然言語処理分野で高い性能を発揮している。",
+                "link": "https://ja.wikipedia.org/wiki/Transformer"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "Attention",
-                "definition": "Transformerモデルにおいて、入力シーケンスの異なる部分間の関係性を学習するメカニズム。どの情報に注目すべきかを判断する。"
+                "definition": "Transformerモデルにおいて、入力シーケンスの異なる部分の重要度を動的に計算し、その情報に「注意」を向けるメカニズム。",
+                "link": "https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%86%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%BB%E3%83%A1%E3%82%AB%E3%83%8B%E3%82%Bズム"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "自己注意力(Self-Attention)",
-                "definition": "Transformerモデルにおいて、単一のシーケンス内で異なる位置にある要素間の関係性を学習するメカニズム。文脈を理解する上で重要。"
+                "definition": "Attentionメカニズムの一種で、入力シーケンス内の異なる位置にある要素同士の関連性を計算し、各要素の表現を豊かにする仕組み。",
+                "link": "https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%86%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%BB%E3%83%A1%E3%82%AB%E3%83%8B%E3%82%Bズム#Self-Attention"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "Attention Mechanism",
-                "definition": "ニューラルネットワークが入力データの一部に「注意」を向けることで、関連性の高い情報に焦点を当てて処理を行うメカニズム。"
+                "definition": "人工ニューラルネットワークにおいて、入力データのある部分を強化し、他の部分を弱化する効果を持つ手法。",
+                "link": "https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%86%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%BB%E3%83%A1%E3%82%AB%E3%83%8B%E3%82%Bズム"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "位置エンコーディング",
-                "definition": "Transformerモデルにおいて、単語の順序情報をモデルに伝えるための手法。単語埋め込みに位置情報を付加する。"
+                "definition": "Transformerモデルにおいて、単語の順序や位置情報をモデルに伝えるための仕組み。Attentionメカニズムが位置情報を考慮しないため必要となる。",
+                "link": "https://ledge.ai/transformer/"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "アーキテクチャ",
-                "definition": "AIモデルの構造や設計。ニューラルネットワークの層の配置や接続方法などを指す。"
+                "definition": "AIモデルやシステムの全体的な設計や構造。データの流れ、各コンポーネントの役割、それらの相互作用などを指す。",
+                "link": "https://e-words.jp/w/%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%81%E3%83%A3.html"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "GPTモデル",
-                "definition": "OpenAIが開発したTransformerベースの言語モデルシリーズ。大規模なテキストデータで事前学習され、高いテキスト生成能力を持つ。"
+                "definition": "OpenAIが開発したTransformerベースの事前学習済み言語モデルのシリーズ。大量のテキストデータで学習されており、高い文章生成能力を持つ。",
+                "link": "https://ja.wikipedia.org/wiki/GPT"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
-                "term": "OpenAI",
-                "definition": "人工知能の研究と開発を行うアメリカの企業。ChatGPTやGPTシリーズの開発で知られる。"
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
+                "term": "Open AI",
+                "definition": "人工知能の研究と開発を行うアメリカの非営利団体および企業。ChatGPTなどを開発し、AI技術の普及に貢献している。",
+                "link": "https://ja.wikipedia.org/wiki/OpenAI"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "BERTモデル",
-                "definition": "Googleが開発したTransformerベースの言語モデル。双方向の文脈を考慮して学習するため、文脈理解に優れている。"
+                "definition": "Googleが開発した自然言語処理モデルで、TransformerのEncoder部分を双方向で利用する。文脈を理解し、様々なNLPタスクで高い精度を発揮する。",
+                "link": "https://ja.wikipedia.org/wiki/BERT_(%E8%A8%80%E8%AA%9E%E3%83%A2%E3%83%87%E3%83%AB)"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "MLM (Masked Language Model)",
-                "definition": "BERTモデルの事前学習タスクの一つで、文中の単語の一部をマスクし、そのマスクされた単語を予測するように学習する。"
+                "definition": "BERTなどの事前学習タスクの一つ。文章中の単語の一部をマスクし、周囲の文脈からマスクされた単語を予測するようにモデルを学習させる。",
+                "link": "https://ledge.ai/bert-model/"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "NSP (Next Sentence Prediction)",
-                "definition": "BERTモデルの事前学習タスクの一つで、2つの文が連続しているか否かを予測するように学習する。文間の関係性を理解するのに役立つ。"
+                "definition": "BERTなどの事前学習タスクの一つ。2つの文が連続しているかを予測させることで、文間の関係性を理解するようにモデルを学習させる。",
+                "link": "https://ledge.ai/bert-model/"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "ROBERTa",
-                "definition": "BERTモデルを改良し、より長い期間の学習と大きなデータセットを用いたモデル。Facebook AIが開発。"
+                "definition": "BERTを改良した言語モデル。より多くのデータと長い学習時間、最適化された事前学習タスクを使用することで、BERTよりも性能が向上している。",
+                "link": "https://ledge.ai/roberta/"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "ALBERT (a Lite BERT)",
-                "definition": "BERTモデルのパラメータ数を大幅に削減し、より効率的な学習と推論を可能にしたモデル。Googleが開発。"
+                "definition": "BERTを軽量化したモデル。パラメータ共有や埋め込み因数分解などの手法を用いることで、モデルサイズを小さくしながらも高い性能を維持する。",
+                "link": "https://ledge.ai/albert/"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "ChatGPT",
-                "definition": "OpenAIが開発した、人間のような自然な会話を生成する大規模言語モデルを搭載したチャットボット。様々な質問応答や文章作成に対応できる。"
+                "definition": "米OpenAI社によって開発された、人間との対話に近い自然な文章を生成するAIチャットサービス。",
+                "link": "https://ja.wikipedia.org/wiki/ChatGPT"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
+                "term": "GPT-1",
+                "definition": "OpenAIが開発した最初のGenerative Pre-trained Transformerモデル。大規模なテキストデータで事前学習され、ファインチューニングによって様々な自然言語処理タスクに適用可能だった。",
+                "link": "https://www.publickey.jp/blog/23/gpt-1gpt-2gpt-3gpt-4openai.html"
+            },
+            {
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "自然言語処理(NLP)",
-                "definition": "人間の言葉（自然言語）をコンピュータに理解させ、処理させる技術分野。テキストマイニング、機械翻訳、音声認識などが含まれる。"
+                "definition": "人間の自然言語（日本語、英語など）をコンピュータに理解させ、処理させる技術分野。機械翻訳、文章要約、感情分析などが含まれる。",
+                "link": "https://ja.wikipedia.org/wiki/%E8%87%AA%E7%84%B6%E8%A8%80%E8%AA%9E%E5%87%A6%E7%90%86"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
+                "term": "GPT-2",
+                "definition": "GPT-1の後継モデルで、さらに大規模なデータで学習され、より高品質な文章生成が可能になった。倫理的な懸念から当初は完全版が公開されなかった。",
+                "link": "https://www.publickey.jp/blog/23/gpt-1gpt-2gpt-3gpt-4openai.html"
+            },
+            {
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "パラメータ",
-                "definition": "AIモデルの学習によって調整される数値のことで、モデルの性能を決定する要素。ニューラルネットワークの重みなどが該当する。"
+                "definition": "機械学習モデルが学習中に調整する内部変数。ニューラルネットワークにおける重みやバイアスなどがこれに該当する。",
+                "link": "https://e-words.jp/w/%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF.html"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "InstructGPT",
-                "definition": "GPT-3をベースに、人間からの指示（Instruction）に従うようにファインチューニングされたモデル。ChatGPTの基盤技術の一つ。"
+                "definition": "人間のフィードバックからの強化学習（RLHF）を用いて、GPT-3を指示に従いやすく、ハルシネーションを減らすようにファインチューニングされたモデル。",
+                "link": "https://ledge.ai/instructgpt/"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
+                "term": "GPT-3.5",
+                "definition": "InstructGPTをベースにしたモデルで、ChatGPTの初期バージョンにも利用された。より自然で対話的な応答が可能になった。",
+                "link": "https://ledge.ai/chatgpt-gpt-3-5-gpt-4/"
+            },
+            {
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
+                "term": "GPT-4",
+                "definition": "OpenAIによって開発されたGPTシリーズの最新モデルの一つ。マルチモーダルに対応し、テキストだけでなく画像入力も処理できるなど、大幅に性能が向上した。",
+                "link": "https://ja.wikipedia.org/wiki/GPT-4"
+            },
+            {
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "データセット",
-                "definition": "機械学習モデルの訓練や評価に使用されるデータの集合。画像、テキスト、音声など様々な形式がある。"
+                "definition": "機械学習モデルの訓練、検証、テストに用いられるデータの集合。大量かつ多様なデータがモデルの性能向上に不可欠。",
+                "link": "https://ja.wikipedia.org/wiki/%E3%83%87%E3%83%BC%E3%82%BF%E3%82%BB%E3%83%83%E3%83%88"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "RLHF (Reinforcement Learning from Human Feedback)",
-                "definition": "人間のフィードバック（評価）を報酬信号として利用し、強化学習を用いてAIモデルを改善する手法。ChatGPTの性能向上に貢献した。"
+                "definition": "人間のフィードバック（評価）を報酬として用い、強化学習によってAIモデルを調整する手法。AIが人間の意図に沿った出力を生成できるようになる。",
+                "link": "https://ja.wikipedia.org/wiki/%E4%BA%BA%E9%96%93%E3%81%AE%E3%83%95%E3%82%A3%E3%83%BC%E3%83%89%E3%83%90%E3%83%83%E3%82%AF%E3%81%8B%E3%82%89%E3%81%AE%E5%BC%B7%E5%8C%96%E5%AD%A6%E7%BF%92"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "アライメント (Alignment)",
-                "definition": "AIが人間の意図や価値観に沿った行動をするように調整すること。AIの安全性や信頼性を確保する上で重要。"
+                "definition": "AIシステムが人間の価値観や意図、目標と一致するように設計・開発されること。AIが望ましくない行動をとるリスクを低減する目的がある。",
+                "link": "https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%A9%E3%82%A4%E3%83%A1%E3%83%B3%E3%83%88_(%E4%BA%BA%E5%B7%A5%E7%9F%A5%E8%83%BD)"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "ファインチューニング",
-                "definition": "事前学習済みのモデルを、特定のタスクやデータセットに合わせて再訓練すること。これにより、特定の用途での性能を向上させることができる。"
+                "definition": "事前学習済みのモデルを、特定のタスクやデータセットに合わせてさらに学習させること。既存の知識を活用し、効率的にモデルを最適化できる。",
+                "link": "https://ledge.ai/fine-tuning/"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "ハルシネーション (Hallucination)",
-                "definition": "生成AIが、事実に基づかない情報や誤った情報を、あたかも事実であるかのように生成してしまう現象。幻覚とも呼ばれる。"
+                "definition": "生成AIが事実に基づかない、または論理的に誤った情報を、もっともらしく生成してしまう現象。幻覚と訳されることもある。",
+                "link": "https://ja.wikipedia.org/wiki/%E3%83%8F%E3%83%AB%E3%82%B7%E3%83%8D%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3_(%E4%BA%BA%E5%B7%A5%E7%9F%A5%E8%83%BD)"
             },
             {
-                "chapter": "生成AI (ジェネレーティブAI)",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "マルチモーダル",
-                "definition": "複数の異なる種類のデータ（例：テキスト、画像、音声）を同時に処理・生成できるAIの能力。"
+                "definition": "複数の異なる種類のデータ（テキスト、画像、音声など）を同時に処理・理解・生成できるAIの能力。例：画像とテキストを組み合わせて理解するAI。",
+                "link": "https://ledge.ai/multi-modal-ai/"
             },
             {
-                "chapter": "現在の生成AI (ジェネレーティブAI)の動向",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "Code Interpreter",
-                "definition": "ChatGPTに搭載された機能で、Pythonコードを実行し、データ分析やグラフ作成などを行うことができる。現在の名称は「Advanced Data Analysis」。"
+                "definition": "ChatGPT内でPythonのコードを実行できる機能。プログラミングの知識がなくとも会話による指示のみで、プログラムに変換しフィードバックしてくれる。",
+                "link": "https://openai.com/blog/chatgpt-plugins#code-interpreter"
             },
             {
-                "chapter": "現在の生成AI (ジェネレーティブAI)の動向",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "GPTS",
-                "definition": "ChatGPTを特定の目的や機能に合わせてカスタマイズできる機能。ユーザーが独自のChatGPTを作成・共有できる。"
+                "definition": "ChatGPTを個々のニーズに合わせてカスタマイズできる機能。特定の目的やタスクに特化したChatGPTのバージョンを作成できる。",
+                "link": "https://openai.com/blog/introducing-gpts"
             },
             {
-                "chapter": "現在の生成AI (ジェネレーティブAI)の動向",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "GPT-4o",
-                "definition": "OpenAIが開発した最新のマルチモーダルモデル。「o」は「omni」（全方位）を意味し、テキスト、音声、画像を統合的に処理できる。"
+                "definition": "OpenAIが開発した最新のマルチモーダルモデル。「omni」（すべての）を意味し、テキスト、音声、画像を統合的に処理する能力を持つ。",
+                "link": "https://openai.com/index/hello-gpt-4o/"
             },
             {
-                "chapter": "現在の生成AI (ジェネレーティブAI)の動向",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "テキスト生成AI",
-                "definition": "入力されたテキストに基づいて、新しいテキストを生成するAI。文章作成、要約、翻訳などに利用される。"
+                "definition": "自然言語処理技術を用いて、人間が書いたような自然な文章を自動的に生成するAI。要約、翻訳、記事作成などに利用される。",
+                "link": "https://ledge.ai/text-generation-ai/"
             },
             {
-                "chapter": "現在の生成AI (ジェネレーティブAI)の動向",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
+                "term": "画像生成AI",
+                "definition": "テキスト記述やその他の入力に基づいて、リアルな画像やイラストを生成するAI。GANや拡散モデルなどが主要な技術。",
+                "link": "https://ledge.ai/image-generation-ai/"
+            },
+            {
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
+                "term": "音楽生成AI",
+                "definition": "ジャンルや気分、楽器構成などの指定に基づいて、オリジナルの音楽を生成するAI。作曲支援やBGM作成に利用される。",
+                "link": "https://ledge.ai/ai-music-generation/"
+            },
+            {
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
+                "term": "音声生成AI",
+                "definition": "テキストから自然な音声を生成するAI（テキスト音声合成）や、既存の音声から新しい音声を生成するAI。ナレーションやバーチャルアシスタントに利用される。",
+                "link": "https://ledge.ai/voice-synthesis-ai/"
+            },
+            {
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "画像のリサイズ",
-                "definition": "画像の縦横のサイズを変更すること。生成AIで生成された画像を特定のサイズに調整する際に必要となる場合がある。"
+                "definition": "画像の縦横のピクセル数を変更して、画像の大きさを調整する処理。",
+                "link": "https://ja.wikipedia.org/wiki/%E7%94%BB%E5%83%8F%E3%81%AE%E3%83%AA%E3%82%B5%E3%82%A4%E3%82%BA"
             },
             {
-                "chapter": "現在の生成AI (ジェネレーティブAI)の動向",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "正規化",
-                "definition": "画像処理において、画素値の範囲を特定の範囲（例：0～1）に変換すること。AIの学習効率を高めるために行われる。"
+                "definition": "画像処理において、ピクセル値の範囲を特定の区間（例：0-1）に変換する処理。モデルの学習効率を高める。",
+                "link": "https://ja.wikipedia.org/wiki/%E6%AD%A3%E8%A6%8F%E5%8C%96_(%E6%95%B0%E5%AD%A6)"
             },
             {
-                "chapter": "現在の生成AI (ジェネレーティブAI)の動向",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "データの水増し (augmentation)",
-                "definition": "画像データを増やす手法。既存の画像を回転、反転、拡大・縮小などの処理を施すことで、学習データの量を増やし、モデルの汎化性能を高める。"
+                "definition": "機械学習において、既存のデータに変換（回転、拡大縮小、反転など）を施すことで、学習データの量を擬似的に増やし、モデルの汎化能力を高める手法。",
+                "link": "https://ledge.ai/data-augmentation/"
             },
             {
-                "chapter": "現在の生成AI (ジェネレーティブAI)の動向",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "データ拡張技術",
-                "definition": "機械学習のデータセットを増やすための技術の総称。画像の水増しなどもこれに含まれる。"
+                "definition": "データの水増しと同義。限られたデータからモデルの性能を向上させるために、既存データに多様な変換を加えてデータ量を増やす技術。",
+                "link": "https://ledge.ai/data-augmentation/"
             },
             {
-                "chapter": "現在の生成AI (ジェネレーティブAI)の動向",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "リマスタリング",
-                "definition": "音源や映像の品質を向上させる処理。生成AIを使って、古い音源や映像をより高音質・高画質に変換する技術も含まれる。"
+                "definition": "既存の音源や映像の品質を向上させるための再編集作業。AIがこれを自動で行う技術も開発されている。",
+                "link": "https://ja.wikipedia.org/wiki/%E3%83%AA%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0"
             },
             {
-                "chapter": "現在の生成AI (ジェネレーティブAI)の動向",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "Claude",
-                "definition": "Anthropic社が開発した大規模言語モデル。安全性と倫理的なAI開発に重点を置いている。"
+                "definition": "Anthropic社が開発したチャット型生成AIツール。自然な会話能力や大量の文字数を処理する能力に優れる。",
+                "link": "https://ja.wikipedia.org/wiki/Claude_(%E8%A8%80%E8%AA%9E%E3%83%A2%E3%83%87%E3%83%AB)"
             },
             {
-                "chapter": "現在の生成AI (ジェネレーティブAI)の動向",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "Gemini",
-                "definition": "Googleが開発したマルチモーダルAIモデル。様々なモダリティ（テキスト、画像、音声、動画）を統合的に理解し、推論できる。"
+                "definition": "Googleによって開発されたマルチモーダルAIモデル。テキスト、画像、音声、動画など多様な情報を理解し、生成できる。",
+                "link": "https://japan.googleblog.com/2023/12/introducing-gemini.html"
             },
             {
-                "chapter": "現在の生成AI (ジェネレーティブAI)の動向",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "Sora",
-                "definition": "OpenAIが開発したテキストから動画を生成するAIモデル。高品質で写実的な動画を生成できることで注目されている。"
+                "definition": "OpenAIが開発中のテキストから動画を生成するAIモデル。高品質で写実的な動画を生成する能力を持つ。",
+                "link": "https://openai.com/sora"
             },
             {
-                "chapter": "現在の生成AI (ジェネレーティブAI)の動向",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "Runway Gen-3",
-                "definition": "Runway社が開発している動画生成AIモデルのシリーズ。テキストや画像から動画を生成する機能を持つ。"
+                "definition": "Runway AIが開発するテキストから動画を生成するAIモデルのシリーズ。クリエイティブな動画制作ツールとして注目されている。",
+                "link": "https://runwayml.com/gen3alpha/"
             },
             {
-                "chapter": "現在の生成AI (ジェネレーティブAI)の動向",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "Luma Dream Machine",
-                "definition": "Luma AIが開発したテキストから動画を生成するAIモデル。写実的な動画生成を得意とする。"
+                "definition": "Luma AIが開発した動画生成AIモデル。テキストや画像から高品質な3Dシーンや動画を生成できる。",
+                "link": "https://lumalabs.ai/dream-machine"
             },
             {
-                "chapter": "現在の生成AI (ジェネレーティブAI)の動向",
-                "term": "ディープフェイク (深層偽造) 技術",
-                "definition": "AI（特にディープラーニング）を用いて、人物の顔や声を他の人物のものと入れ替えたり、存在しない事象をあたかも本物であるかのように生成する技術。悪用されると偽情報や詐欺につながる危険性がある。"
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
+                "term": "ディープフェイク (深層偽造)技術",
+                "definition": "AI、特にディープラーニングを用いて、人物の顔や音声を合成し、あたかもその人物が実際に存在しない言動をしたかのように見せかける技術。偽情報の拡散に悪用されるリスクがある。",
+                "link": "https://ja.wikipedia.org/wiki/%E3%83%87%E3%82%A3%E3%83%BC%E3%83%97%E3%83%95%E3%82%A7%E3%82%A4%E3%82%AF"
             },
             {
-                "chapter": "現在の生成AI (ジェネレーティブAI)の動向",
+                "chapter": "第2章 生成AI (ジェネレーティブAI)",
                 "term": "偽情報(ディスインフォメーション)",
-                "definition": "意図的に人を騙すことを目的として作成・拡散される誤った情報。ディープフェイク技術が悪用されることで、より巧妙な偽情報が生成される危険性がある。"
+                "definition": "意図的に誤解させる目的で作成・拡散される虚偽または不正確な情報。ディープフェイク技術によってその拡散が加速される懸念がある。",
+                "link": "https://ja.wikipedia.org/wiki/%E3%83%87%E3%82%A3%E3%82%B9%E3%82%A4%E3%83%B3%E3%83%95%E3%82%A9%E3%83%A1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3"
             },
             {
-                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "chapter": "第4章 情報リテラシー・基本理念とAI社会原則",
                 "term": "インターネットリテラシー",
-                "definition": "インターネットを安全かつ効果的に利用するための知識やスキル。情報の真偽を見極める能力や、オンライン上での適切な行動などが含まれる。"
+                "definition": "インターネットを安全かつ効果的に利用するための知識、スキル、判断能力。情報の真偽を見極める能力などが含まれる。",
+                "link": "https://ja.wikipedia.org/wiki/%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%8D%E3%83%83%E3%83%88%E3%83%BB%E3%83%AA%E3%83%86%E3%83%A9%E3%82%B7%E3%83%BC"
             },
             {
-                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "chapter": "第4章 情報リテラシー・基本理念とAI社会原則",
                 "term": "テクノロジーの理解",
-                "definition": "AIを含む様々な技術の仕組みや機能を理解すること。適切に活用し、リスクを回避するために重要。"
+                "definition": "情報技術やAI技術の仕組み、特性、影響について基本的な知識を持つこと。これにより、適切に技術を利活用できる。",
+                "link": "https://e-words.jp/w/%E6%83%85%E5%A0%B1%E3%83%AA%E3%83%86%E3%83%A9%E3%82%B7%E3%83%BC.html"
             },
             {
-                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "chapter": "第4章 情報リテラシー・基本理念とAI社会原則",
                 "term": "情報リテラシー",
-                "definition": "情報を適切に収集、評価、利用する能力。情報の信頼性を見極め、批判的に思考するスキルが含まれる。"
+                "definition": "情報を効果的に検索、評価、利用、共有する能力。特に、情報の信頼性や偏りを見抜く批判的思考力を含む。",
+                "link": "https://ja.wikipedia.org/wiki/%E6%83%85%E5%A0%B1%E3%83%AA%E3%83%86%E3%83%A9%E3%82%B7%E3%83%BC"
             },
             {
-                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "chapter": "第4章 情報リテラシー・基本理念とAI社会原則",
                 "term": "セキュリティとプライバシー",
-                "definition": "デジタル環境におけるデータの保護と個人の情報の管理に関する概念。サイバー攻撃からの防御や個人情報の適切な取り扱いが重要となる。"
+                "definition": "情報システムやデータが不正アクセス、改ざん、漏洩から保護されている状態（セキュリティ）と、個人情報が適切に管理され、個人の権利が尊重される状態（プライバシー）の確保。",
+                "link": "https://www.soumu.go.jp/main_sosiki/cybersecurity/security_privacy.html"
             },
             {
-                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "chapter": "第4章 情報リテラシー・基本理念とAI社会原則",
                 "term": "デジタル市民権",
-                "definition": "デジタル社会において、市民として適切に行動し、権利を行使し、責任を果たすための能力や意識。"
+                "definition": "デジタル社会において、個人が持つべき権利と責任。インターネットへのアクセス権、表現の自由、プライバシー保護、デジタル上の安全などが含まれる。",
+                "link": "https://e-words.jp/w/%E3%83%87%E3%82%B8%E3%82%BF%E3%83%AB%E5%B8%82%E6%B0%91%E6%A8%A9.html"
             },
             {
-                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "chapter": "第4章 情報リテラシー・基本理念とAI社会原則",
                 "term": "フィッシング詐欺",
-                "definition": "正規の企業やサービスを装い、偽のウェブサイトやメールに誘導して、個人情報や金銭をだまし取る詐欺の手口。"
+                "definition": "金融機関や有名企業などを装い、偽のウェブサイトやメールに誘導して、個人情報や金銭をだまし取る詐欺行為。",
+                "link": "https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A3%E3%83%83%E3%82%B7%E3%83%B3%E3%82%B0_(%E8%A8%90%E6%AC%BA)"
             },
             {
-                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "chapter": "第4章 情報リテラシー・基本理念とAI社会原則",
                 "term": "スミッシング",
-                "definition": "SMS（ショートメッセージサービス）を利用したフィッシング詐欺。偽のメッセージを送信し、個人情報をだまし取ろうとする。"
+                "definition": "SMS（ショートメッセージサービス）を利用したフィッシング詐欺。偽のメッセージで悪意のあるリンクをクリックさせようとする。",
+                "link": "https://ja.wikipedia.org/wiki/%E3%82%B9%E3%83%9F%E3%83%83%E3%82%B7%E3%83%B3%E3%82%B0"
             },
             {
-                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "chapter": "第4章 情報リテラシー・基本理念とAI社会原則",
                 "term": "ヴィッシング",
-                "definition": "電話を利用したフィッシング詐欺。偽の電話で個人情報や金銭をだまし取ろうとする。"
+                "definition": "音声通話（Voice）を利用したフィッシング詐欺。電話で個人情報を聞き出そうとする。",
+                "link": "https://ja.wikipedia.org/wiki/%E3%83%B4%E3%82%A3%E3%83%83%E3%82%B7%E3%83%B3%E3%82%B0"
             },
             {
-                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "chapter": "第4章 情報リテラシー・基本理念とAI社会原則",
                 "term": "マルウェア",
-                "definition": "悪意を持って作成されたソフトウェアの総称。ウイルス、ワーム、トロイの木馬などが含まれ、コンピュータに損害を与えたり情報を盗み出したりする。"
+                "definition": "悪意のあるソフトウェアの総称。ウイルス、ワーム、トロイの木馬、ランサムウェアなどが含まれ、コンピュータシステムに損害を与えたり、情報を盗んだりする。",
+                "link": "https://ja.wikipedia.org/wiki/%E3%83%9E%E3%83%AB%E3%82%A6%E3%82%A7%E3%82%A2"
             },
             {
-                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "chapter": "第4章 情報リテラシー・基本理念とAI社会原則",
                 "term": "アンチウイルスソフトウェア",
-                "definition": "コンピュータウイルスやその他のマルウェアを検出し、駆除・隔離するソフトウェア。"
+                "definition": "コンピュータウイルスやその他のマルウェアの検出、除去、予防を行うソフトウェア。",
+                "link": "https://ja.wikipedia.org/wiki/%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E対策%E3%82%BD%E3%83%95%E3%83%88"
             },
             {
-                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "chapter": "第4章 情報リテラシー・基本理念とAI社会原則",
                 "term": "ランサムウェア",
-                "definition": "コンピュータのデータやシステムをロックし、解除と引き換えに金銭（身代金）を要求するマルウェアの一種。"
+                "definition": "マルウェアの一種で、コンピュータのデータやシステムを暗号化し、復旧と引き換えに身代金（Ransom）を要求するもの。",
+                "link": "https://ja.wikipedia.org/wiki/%E3%83%A9%E3%83%B3%E3%82%B5%E3%83%A0%E3%82%A6%E3%82%A7%E3%82%A2"
             },
             {
-                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "chapter": "第4章 情報リテラシー・基本理念とAI社会原則",
                 "term": "ソーシャルエンジニアリング攻撃",
-                "definition": "人の心理的な隙や行動のミスを利用して、機密情報などを不正に入手する詐欺の手口。技術的なハッキングではなく、人をだますことが中心。"
+                "definition": "技術的な手法ではなく、人間の心理的な隙や行動のミスを突いて、情報を盗み出したり、不正な操作を行わせたりする攻撃手法。",
+                "link": "https://ja.wikipedia.org/wiki/%E3%82%BD%E3%83%BC%E3%82%B7%E3%83%A3%E3%83%AB%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%E3%83%AA%E3%83%B3%E3%82%B0"
             },
             {
-                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "chapter": "第4章 情報リテラシー・基本理念とAI社会原則",
                 "term": "スピアフィッシング",
-                "definition": "特定の個人や組織を標的とした、巧妙なフィッシング詐欺。標的の情報を事前に収集し、信頼性のあるメールを装う。"
+                "definition": "特定の個人や組織を標的とした、巧妙なフィッシング詐欺。標的の情報を事前に収集し、信頼させるような内容で攻撃を行う。",
+                "link": "https://ja.wikipedia.org/wiki/%E3%82%B9%E3%83%94%E3%82%A2%E3%83%95%E3%82%A3%E3%83%83%E3%82%B7%E3%83%B3%E3%82%B0"
             },
             {
-                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "chapter": "第4章 情報リテラシー・基本理念とAI社会原則",
                 "term": "ベイト攻撃",
-                "definition": "魅力的な誘い文句（「無料プレゼント」など）で被害者を誘い込み、マルウェアをダウンロードさせたり、個人情報を入力させたりする攻撃。"
+                "definition": "攻撃者がUSBメモリなどの物理メディアを意図的に置き去りにし、それを拾った人が中身を確認しようとすることでマルウェアに感染させる手法。",
+                "link": "https://e-words.jp/w/%E3%83%99%E3%82%A4%E3%83%88%E6%94%BB%E6%92%83.html"
             },
             {
-                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "chapter": "第4章 情報リテラシー・基本理念とAI社会原則",
                 "term": "ブラックメール",
-                "definition": "秘密や弱みを握っていると脅迫し、金銭などを要求する行為。サイバー空間では、ハッキングで得た情報を悪用するケースもある。"
+                "definition": "脅迫メールの一種で、攻撃者が被害者の秘密や弱みを握っていると主張し、金銭などを要求するもの。性的な内容で脅迫するケースも多い。",
+                "link": "https://e-words.jp/w/%E3%83%96%E3%83%A9%E3%83%83%E3%82%AF%E3%83%A1%E3%83%BC%E3%83%AB.html"
             },
             {
-                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "chapter": "第4章 情報リテラシー・基本理念とAI社会原則",
                 "term": "プレテキスト",
-                "definition": "ソーシャルエンジニアリング攻撃の一種で、信頼できる人物や組織になりすまし、もっともらしい口実（プレテキスト）を使って情報を引き出す手口。"
+                "definition": "ソーシャルエンジニアリング攻撃の一種。攻撃者が信頼できる人物や機関を装って、虚偽の口実（プレテキスト）を作り、被害者から情報を引き出す手法。",
+                "link": "https://e-words.jp/w/%E3%83%97%E3%83%AC%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88.html"
             },
             {
-                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "chapter": "第4章 情報リテラシー・基本理念とAI社会原則",
                 "term": "個人情報保護法",
-                "definition": "個人情報の適切な取り扱いを定めた日本の法律。個人の権利利益の保護を目的としている。"
+                "definition": "個人情報の適正な取扱いを定めた日本の法律。個人の権利利益を保護しつつ、個人情報の有用性に配慮することを目的とする。",
+                "link": "https://www.ppc.go.jp/personalinfo/"
             },
             {
-                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "chapter": "第4章 情報リテラシー・基本理念とAI社会原則",
                 "term": "改正個人情報保護法",
-                "definition": "個人情報保護法が社会情勢の変化に合わせて改正されたもの。2022年4月1日に施行され、企業により厳しい個人情報管理が求められるようになった。"
+                "definition": "デジタル社会の進展に対応するため、個人情報保護法が改正されたもの。個人情報の利活用促進と保護のバランスを図る。",
+                "link": "https://www.ppc.go.jp/personalinfo/revised_act/"
             },
             {
-                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "chapter": "第4章 情報リテラシー・基本理念とAI社会原則",
                 "term": "個人情報保護委員会",
-                "definition": "個人情報保護法に基づいて設置された行政委員会。個人情報の適正な取り扱いを監督し、個人の権利利益を保護する役割を担う。"
+                "definition": "個人情報保護法に基づいて設置された独立行政委員会。個人情報の保護に関する監視、監督、啓発活動を行う。",
+                "link": "https://www.ppc.go.jp/"
             },
             {
-                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "chapter": "第4章 情報リテラシー・基本理念とAI社会原則",
                 "term": "個人情報取扱事業者",
-                "definition": "個人情報データベース等を事業の用に供している者。個人情報保護法における様々な義務を負う。"
+                "definition": "個人情報データベース等を事業の用に供している者。個人情報保護法に基づき、個人情報の適正な取扱いが義務付けられる。",
+                "link": "https://www.ppc.go.jp/files/pdf/sekinin_01.pdf"
             },
             {
-                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "chapter": "第4章 情報リテラシー・基本理念とAI社会原則",
                 "term": "個人識別符号",
-                "definition": "特定の個人を識別できる情報のうち、政令で定められたもの。指紋データや顔画像データなどが含まれる。"
+                "definition": "特定の個人を識別できる情報。指紋、顔のデータ、DNA、パスポート番号などが該当する。",
+                "link": "https://www.ppc.go.jp/faq/personal_id_code/"
             },
             {
-                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "chapter": "第4章 情報リテラシー・基本理念とAI社会原則",
                 "term": "要配慮個人情報",
-                "definition": "不当な差別や偏見などの不利益が生じないよう、特に配慮が必要な個人情報。人種、信条、病歴、犯罪の経歴などが該当する。"
+                "definition": "人種、信条、病歴、犯罪の経歴など、不当な差別や偏見が生じる可能性のある個人情報。取得や利用に厳格な制限がある。",
+                "link": "https://www.ppc.go.jp/faq/required_care_personal_information/"
             },
             {
-                "chapter": "情報リテラシー・基本理念とAI社会原則",
-                "term": "機微 (センシティブ) 情報",
-                "definition": "要配慮個人情報と同様に、取り扱いに特に注意が必要な個人情報。金融機関における預金情報など、個人情報の類型によって異なる定義がなされる場合がある。"
+                "chapter": "第4章 情報リテラシー・基本理念とAI社会原則",
+                "term": "機微(センシティブ)情報",
+                "definition": "要配慮個人情報と同様に、特に慎重な取扱いが必要とされる個人情報。医療情報、金融情報などが含まれる場合がある。",
+                "link": "https://www.soumu.go.jp/main_content/000282110.pdf"
             },
             {
-                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "chapter": "第4章 情報リテラシー・基本理念とAI社会原則",
                 "term": "匿名加工情報",
-                "definition": "個人情報を特定の個人を識別できないように加工し、かつ復元できないようにした情報。個人情報保護法の規制が緩和される。"
+                "definition": "個人情報を特定の個人を識別できないように加工し、かつ復元できないようにした情報。個人情報保護法の規制が緩和される。",
+                "link": "https://www.ppc.go.jp/personalinfo/anonymous/"
             },
             {
-                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "chapter": "第4章 情報リテラシー・基本理念とAI社会原則",
                 "term": "マスキング",
-                "definition": "個人情報の一部を隠したり、別の文字で置き換えたりして、個人を特定できないようにする処理。匿名加工情報を作成する際の手法の一つ。"
+                "definition": "個人情報の一部を隠したり、別の情報に置き換えたりすることで、個人を特定できないようにする技術。匿名加工の手段の一つ。",
+                "link": "https://e-words.jp/w/%E3%83%87%E3%83%BC%E3%82%BF%E3%83%9E%E3%82%B9%E3%82%AD%E3%83%B3%E3%82%B0.html"
             },
             {
-                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "chapter": "第4章 情報リテラシー・基本理念とAI社会原則",
                 "term": "知的財産権",
-                "definition": "人間の知的創造活動によって生み出されたものに対して与えられる独占的な権利の総称。著作権、特許権、商標権、意匠権などがある。"
+                "definition": "人間の知的活動によって創作されたものに対し、創作者に与えられる排他的な権利の総称。著作権、特許権、商標権などが含まれる。",
+                "link": "https://www.jpo.go.jp/system/laws/rule/chizai/index.html"
             },
             {
-                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "chapter": "第4章 情報リテラシー・基本理念とAI社会原則",
                 "term": "著作権",
-                "definition": "思想または感情を創作的に表現した文芸、学術、美術または音楽の著作物に対して、著作者に与えられる権利。AI生成物における著作権の帰属が議論の対象となることがある。"
+                "definition": "文芸、学術、美術、音楽などの創作物（著作物）を保護する権利。著作者の死後も一定期間保護される。",
+                "link": "https://ja.wikipedia.org/wiki/%E8%91%97%E4%BD%9C%E6%A8%A9"
             },
             {
-                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "chapter": "第4章 情報リテラシー・基本理念とAI社会原則",
                 "term": "特許権",
-                "definition": "発明に対して付与される独占排他的な権利。新しい技術やAIアルゴリズムなどが対象となる。"
+                "definition": "新規性があり、進歩性を有する発明を保護する権利。特許庁に出願し審査を経て付与される。",
+                "link": "https://ja.wikipedia.org/wiki/%E7%89%B9%E8%A8%B1%E6%A8%A9"
             },
             {
-                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "chapter": "第4章 情報リテラシー・基本理念とAI社会原則",
                 "term": "商標権",
-                "definition": "商品やサービスの名称、ロゴなど、事業者が自己の商品・サービスを他と区別するために使用する標識（商標）に対して与えられる権利。"
+                "definition": "商品やサービスの名称、ロゴなどを保護する権利。他社の類似商品との混同を防ぎ、ブランドの識別力を保護する。",
+                "link": "https://ja.wikipedia.org/wiki/%E5%95%86%E6%A8%99%E6%A8%A9"
             },
             {
-                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "chapter": "第4章 情報リテラシー・基本理念とAI社会原則",
                 "term": "意匠権",
-                "definition": "物品の美的外観（デザイン）に対して与えられる権利。AIが生成したデザインも対象となる可能性がある。"
+                "definition": "物品の美的外観（デザイン）を保護する権利。工業製品などの形状、模様、色彩などを含む。",
+                "link": "https://ja.wikipedia.org/wiki/%E6%84%8F%E5%8C%A0%E6%A8%A9"
             },
             {
-                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "chapter": "第4章 情報リテラシー・基本理念とAI社会原則",
                 "term": "肖像権",
-                "definition": "自分の顔や姿を無断で撮影されたり、公開されたりしない権利。AIによる画像生成やディープフェイク技術によって侵害される危険性がある。"
+                "definition": "個人の肖像（顔や姿）が、許可なく撮影されたり、公表されたりしないように保護される権利。プライバシー権の一部。",
+                "link": "https://ja.wikipedia.org/wiki/%E8%82%96%E5%83%8F%E6%A8%A9"
             },
             {
-                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "chapter": "第4章 情報リテラシー・基本理念とAI社会原則",
                 "term": "パブリシティ権",
-                "definition": "有名人の氏名や肖像を、商品化するなど商業的に利用する権利。AIが有名人の画像や音声を生成する際に問題となる場合がある。"
+                "definition": "有名人の肖像や氏名が持つ経済的価値を保護する権利。商業的に利用する際には本人の許諾が必要となる。",
+                "link": "https://ja.wikipedia.org/wiki/%E3%83%91%E3%83%96%E3%83%AA%E3%82%B7%E3%83%86%E3%82%A3%E6%A8%A9"
             },
             {
-                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "chapter": "第4章 情報リテラシー・基本理念とAI社会原則",
                 "term": "不正競争防止法",
-                "definition": "事業者間の公正な競争を阻害する行為を規制する法律。営業秘密の侵害や、著名表示の混同などが対象となる。"
+                "definition": "事業者間の公正な競争を確保するための法律。営業秘密の侵害、商品の模倣、虚偽表示などを規制する。",
+                "link": "https://ja.wikipedia.org/wiki/%E4%B8%8D%E6%AD%A3%E7%AB%B6%E4%BA%89%E9%98%B2%E6%AD%A2%E6%B3%95"
             },
             {
-                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "chapter": "第4章 情報リテラシー・基本理念とAI社会原則",
                 "term": "営業秘密",
-                "definition": "事業活動に有用な技術上または営業上の情報で、秘密として管理され、公然と知られていないもの。不正競争防止法で保護される。"
+                "definition": "企業が保有する、秘密として管理され、事業活動に有用な技術上または営業上の情報。不正に取得・利用された場合に保護される。",
+                "link": "https://ja.wikipedia.org/wiki/%E5%96%B6%E6%A5%AD%E7%A7%98%E5%AF%86"
             },
             {
-                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "chapter": "第4章 情報リテラシー・基本理念とAI社会原則",
                 "term": "限定提供データ",
-                "definition": "不正競争防止法で保護されるデータの類型の一つ。特定の者に限定して提供される、営業秘密以外の技術上または営業上の情報。"
+                "definition": "特定の者にのみ提供され、かつ秘密として管理されている技術上または営業上のデータ。不正競争防止法で保護される対象となる場合がある。",
+                "link": "https://www.meti.go.jp/policy/economy/chizai/chiteki/trade-secret/teikyo-data.html"
             },
             {
-                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "chapter": "第4章 情報リテラシー・基本理念とAI社会原則",
                 "term": "著作権侵害",
-                "definition": "著作権者の許諾を得ずに著作物を利用する行為。AIが既存の著作物を学習し、類似のものを生成した場合に問題となることがある。"
+                "definition": "著作権者の許諾なく、著作物を複製、公衆送信、翻案などを行う行為。民事上および刑事上の責任を問われる可能性がある。",
+                "link": "https://ja.wikipedia.org/wiki/%E8%91%97%E4%BD%9C%E6%A8%A9%E4%BE%B5%E5%AE%B3"
             },
             {
-                "chapter": "情報リテラシー・基本理念とAI社会原則",
-                "term": "名誉毀損",
-                "definition": "公然と事実を摘示し、人の名誉を傷つける行為。AIが誤った情報を生成し、特定の個人の名誉を毀損する可能性もある。"
+                "chapter": "第4章 情報リテラシー・基本理念とAI社会原則",
+                "term": "名誉棄損",
+                "definition": "公然と事実を摘示し、人の名誉を傷つける行為。事実の真偽にかかわらず成立する可能性がある。",
+                "link": "https://ja.wikipedia.org/wiki/%E5%90%8D%E8%AA%89%E6%AF%84%E6%90%8D"
             },
             {
                 "chapter": "情報リテラシー・基本理念とAI社会原則",
                 "term": "AI社会の基本理念",
-                "definition": "AIが社会にもたらす影響を考慮し、AIの開発・利用において遵守すべき基本的な考え方。人間中心の原則などが含まれる。"
+                "definition": "人間がAIの便益を最大限に享受するために必要な変革が行われ、AIの恩恵を享受している、または、必要な時に直ちにAIを導入しその恩恵を得られる状態にある社会の基本的な考え方。",
+                "link": "https://www.meti.go.jp/policy/it_policy/ai/gikai/ai_governance_philosophy.pdf"
+            },
+            {
+                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "term": "人間中心のAI社会原則",
+                "definition": "AIの利用が憲法及び国際的な規範の保障する基本的人権を侵さないという原則。",
+                "link": "https://www.soumu.go.jp/main_content/000570778.pdf"
             },
             {
                 "chapter": "情報リテラシー・基本理念とAI社会原則",
                 "term": "人間の尊厳が尊重される社会 (Dignity)",
-                "definition": "AI社会原則の一つで、AIの開発・利用において人間の尊厳を最大限に尊重し、個人の権利や自由を侵害しないことを目指す考え方。"
+                "definition": "AIが人間の尊厳を損なうことなく、人間の価値や権利が尊重される社会。",
+                "link": "https://www.soumu.go.jp/main_content/000570778.pdf"
             },
             {
                 "chapter": "情報リテラシー・基本理念とAI社会原則",
                 "term": "多様な背景を持つ人々が多様な幸せを追求できる社会 (Diversity & Inclusion)",
-                "definition": "AI社会原則の一つで、AIが多様な人々のニーズに応え、社会の多様性を尊重し、誰もがAIの恩恵を受けられるようにすることを目指す考え方。"
+                "definition": "AIが多様な人々のニーズに応え、包摂的な社会の実現に貢献する社会。",
+                "link": "https://www.soumu.go.jp/main_content/000570778.pdf"
             },
             {
                 "chapter": "情報リテラシー・基本理念とAI社会原則",
-                "term": "持続可能な社会 (Sustainability)",
-                "definition": "AI社会原則の一つで、AIの開発・利用が将来世代にわたって経済、社会、環境の持続可能性に貢献することを目指す考え方。"
+                "term": "持続性ある社会 (Sustainability)",
+                "definition": "AIの利用が、環境、社会、経済の観点から持続可能である社会。",
+                "link": "https://www.soumu.go.jp/main_content/000570778.pdf"
             },
             {
                 "chapter": "情報リテラシー・基本理念とAI社会原則",
-                "term": "人間中心の考え方",
-                "definition": "AIの開発・利用において、人間の幸福や利益を最優先し、AIを人間の道具として位置づける考え方。"
+                "term": "AI社会原則",
+                "definition": "「AI-Readyな社会」において、国や自治体をはじめとする我が国社会全体、さらには多国間の枠組みで実現されるべき社会的枠組みに関する原則。",
+                "link": "https://www.soumu.go.jp/main_content/000570778.pdf"
             },
             {
                 "chapter": "情報リテラシー・基本理念とAI社会原則",
-                "term": "安全性・公平性",
-                "definition": "AIシステムの開発・運用において、予期せぬ事故や損害を防ぎ、偏見や差別をなくし、公正な結果をもたらすことを保証する原則。"
+                "term": "人間中心の原則",
+                "definition": "AIの利用は、憲法及び国際的な規範の保障する基本的人権を侵すものであってはならないという原則。",
+                "link": "https://www.soumu.go.jp/main_content/000570778.pdf"
             },
             {
                 "chapter": "情報リテラシー・基本理念とAI社会原則",
-                "term": "プライバシー保護",
-                "definition": "AIシステムの開発・運用において、個人のプライバシーを尊重し、個人情報の適切な収集、利用、管理を行う原則。"
+                "term": "教育・リテラシーの原則",
+                "definition": "AIに関する知識やスキルを普及させ、社会全体のリテラシーを高めることの重要性を示す原則。",
+                "link": "https://www.soumu.go.jp/main_content/000570778.pdf"
             },
             {
                 "chapter": "情報リテラシー・基本理念とAI社会原則",
-                "term": "セキュリティ確保",
-                "definition": "AIシステムのセキュリティを確保し、不正アクセス、データ漏洩、改ざんなどから保護する原則。"
+                "term": "プライバシー確保の原則",
+                "definition": "AIシステムの開発・利用において、個人のプライバシーが適切に保護されるべきであるという原則。",
+                "link": "https://www.soumu.go.jp/main_content/000570778.pdf"
             },
             {
                 "chapter": "情報リテラシー・基本理念とAI社会原則",
-                "term": "透明性",
-                "definition": "AIシステムの判断根拠や動作原理が理解できるように、情報が公開されていること。AIの信頼性を高める上で重要。"
+                "term": "セキュリティ確保の原則",
+                "definition": "AIシステムの安全性と信頼性を確保し、サイバー攻撃や誤動作から保護されるべきであるという原則。",
+                "link": "https://www.soumu.go.jp/main_content/000570778.pdf"
             },
             {
                 "chapter": "情報リテラシー・基本理念とAI社会原則",
-                "term": "アカウンタビリティ",
-                "definition": "AIシステムによって生じた結果について、誰がどのように責任を負うのかを明確にすること。説明責任とも訳される。"
+                "term": "公正競争確保の原則",
+                "definition": "AI分野において、新たなビジネスやサービスが創出され、持続的な経済成長が維持されるよう、公正な競争環境が維持されなければならないという原則。",
+                "link": "https://www.soumu.go.jp/main_content/000570778.pdf"
             },
             {
                 "chapter": "情報リテラシー・基本理念とAI社会原則",
-                "term": "教育・リテラシー",
-                "definition": "AIに関する知識や理解を社会全体で高めること。AIを適切に活用し、リスクに対応するための能力を養う。"
+                "term": "公平・説明責任及び透明性の原則",
+                "definition": "AIシステムが公平に機能し、その決定過程が説明可能であり、透明性が確保されるべきであるという原則。",
+                "link": "https://www.soumu.go.jp/main_content/000570778.pdf"
             },
             {
                 "chapter": "情報リテラシー・基本理念とAI社会原則",
-                "term": "公正競争確保",
-                "definition": "AI技術の発展が、市場における公正な競争を阻害しないようにすること。特定の企業によるAI技術の独占などを防ぐ。"
+                "term": "イノベーションの原則",
+                "definition": "AI技術の研究開発と社会実装を促進し、新たな価値創造と社会課題解決に貢献すべきであるという原則。",
+                "link": "https://www.soumu.go.jp/main_content/000570778.pdf"
             },
             {
                 "chapter": "情報リテラシー・基本理念とAI社会原則",
-                "term": "イノベーション",
-                "definition": "AI技術の発展を通じて、新たな価値や製品、サービスを生み出すこと。社会全体の進歩に貢献する。"
+                "term": "AI利活用原則の基本理念",
+                "definition": "AIの恩恵を最大限に享受しつつ、AIがもたらすリスクを適切に管理するための基本的な考え方。",
+                "link": "https://www.soumu.go.jp/main_content/000570778.pdf"
+            },
+            {
+                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "term": "AIネットワーク",
+                "definition": "AIシステムが相互に連携し、協調して機能するシステムの集合体。",
+                "link": "https://www.soumu.go.jp/main_content/000570778.pdf"
+            },
+            {
+                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "term": "AI利活用原則(10の原則)",
+                "definition": "内閣府が策定したAIの利用に関する基本的な原則。人間中心、プライバシー、セキュリティ、公平性、透明性、説明責任、イノベーションなどを柱とする。",
+                "link": "https://www.meti.go.jp/policy/it_policy/ai/gikai/ai_governance_philosophy.pdf"
+            },
+            {
+                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "term": "適正利用の原則",
+                "definition": "AIシステムが意図された目的の範囲内で、倫理的かつ法的に問題のない形で利用されるべきであるという原則。",
+                "link": "https://www.meti.go.jp/policy/it_policy/ai/gikai/ai_governance_philosophy.pdf"
+            },
+            {
+                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "term": "適正学習の原則",
+                "definition": "AIモデルの学習に用いられるデータが、偏りなく、適切に収集・処理されるべきであるという原則。",
+                "link": "https://www.meti.go.jp/policy/it_policy/ai/gikai/ai_governance_philosophy.pdf"
+            },
+            {
+                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "term": "連携の原則",
+                "definition": "AIシステムや関連する主体（開発者、提供者、利用者）が相互に協力し、情報共有を行うことで、AIの安全性と信頼性を高めるという原則。",
+                "link": "https://www.meti.go.jp/policy/it_policy/ai/gikai/ai_governance_philosophy.pdf"
+            },
+            {
+                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "term": "安全の原則",
+                "definition": "AIシステムが、人間に危害を加えたり、社会に混乱をもたらしたりしないよう、安全性に最大限配慮して設計・運用されるべきであるという原則。",
+                "link": "https://www.meti.go.jp/policy/it_policy/ai/gikai/ai_governance_philosophy.pdf"
+            },
+            {
+                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "term": "セキュリティの原則",
+                "definition": "AIシステムがサイバー攻撃や不正アクセスから保護され、データの機密性、完全性、可用性が確保されるべきであるという原則。",
+                "link": "https://www.meti.go.jp/policy/it_policy/ai/gikai/ai_governance_philosophy.pdf"
+            },
+            {
+                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "term": "プライバシーの原則",
+                "definition": "AIシステムの開発・利用において、個人のプライバシー権が尊重され、個人情報が適切に管理されるべきであるという原則。",
+                "link": "https://www.meti.go.jp/policy/it_policy/ai/gikai/ai_governance_philosophy.pdf"
+            },
+            {
+                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "term": "尊厳・自律の原則",
+                "definition": "AIが人間の尊厳を尊重し、人間の自律的な意思決定を支援する形で利用されるべきであるという原則。",
+                "link": "https://www.meti.go.jp/policy/it_policy/ai/gikai/ai_governance_philosophy.pdf"
+            },
+            {
+                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "term": "公平性の原則",
+                "definition": "AIシステムが特定の個人やグループに対して不当な差別や偏見を生じさせず、公正な判断を下すべきであるという原則。",
+                "link": "https://www.meti.go.jp/policy/it_policy/ai/gikai/ai_governance_philosophy.pdf"
+            },
+            {
+                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "term": "透明性の原則",
+                "definition": "AIシステムの機能、目的、限界、そして意思決定プロセスが、関係者にとって理解可能で、開示されるべきであるという原則。",
+                "link": "https://www.meti.go.jp/policy/it_policy/ai/gikai/ai_governance_philosophy.pdf"
+            },
+            {
+                "chapter": "情報リテラシー・基本理念とAI社会原則",
+                "term": "アカウンタビリティの原則",
+                "definition": "AIシステムによって生じた結果に対して、責任の所在が明確であり、その説明責任が果たされるべきであるという原則。",
+                "link": "https://www.meti.go.jp/policy/it_policy/ai/gikai/ai_governance_philosophy.pdf"
             },
             {
                 "chapter": "情報リテラシー・基本理念とAI社会原則",
                 "term": "AIガバナンスの構築",
-                "definition": "AIの適切な開発・利用を促進するための枠組みや体制を整備すること。倫理的、法的、社会的な課題に対応する。"
+                "definition": "AIの利活用によって生じるリスクをステークホルダーにとって受容可能な水準で管理しつつ、そこからもたらされる正のインパクトを最大化することを目的とする、ステークホルダーによる技術的、組織的、及び社会的システムの設計及び運用。",
+                "link": "https://www.meti.go.jp/policy/it_policy/ai/gikai/ai_governance_philosophy.pdf"
             },
             {
                 "chapter": "情報リテラシー・基本理念とAI社会原則",
-                "term": "環境・リスク分析",
-                "definition": "AIシステムの導入や運用に伴う潜在的なリスク（倫理的、法的、社会的、技術的など）を特定し、評価するプロセス。"
+                "term": "AI開発者",
+                "definition": "AIシステムを開発する事業者（AIを研究開発する事業者を含む）。AIモデル・アルゴリズムの開発、データ収集、学習、検証を通してAIシステムを構築する役割を担う。",
+                "link": "https://www.meti.go.jp/policy/it_policy/ai/gikai/ai_governance_philosophy.pdf"
             },
             {
                 "chapter": "情報リテラシー・基本理念とAI社会原則",
-                "term": "AIガバナンス・ゴール",
-                "definition": "AIガバナンスの目標。AIが社会に与える良い影響を最大化し、負の影響を最小化することを目指す。"
+                "term": "AI提供者",
+                "definition": "開発されたAIシステムに付加価値を加えて、AI利用者にシステムやサービスを提供する事業者。",
+                "link": "https://www.meti.go.jp/policy/it_policy/ai/gikai/ai_governance_philosophy.pdf"
             },
             {
                 "chapter": "情報リテラシー・基本理念とAI社会原則",
-                "term": "AIマネジメントシステム",
-                "definition": "AIガバナンスを実現するための組織的な仕組みやプロセス。AIの開発から運用までのライフサイクル全体を管理する。"
+                "term": "AI利用者",
+                "definition": "事業活動において、AIシステム又はAIサービスを利用する事業者。AI提供者が意図している適正な利用を行い、環境変化等の情報をAI提供者と共有し正常稼働を継続すること又は必要に応じて提供されたAIシステムを運用する役割を担う。",
+                "link": "https://www.meti.go.jp/policy/it_policy/ai/gikai/ai_governance_philosophy.pdf"
             },
             {
                 "chapter": "情報リテラシー・基本理念とAI社会原則",
-                "term": "AI開発者(AI Developer)",
-                "definition": "AIシステムを設計、構築、訓練する個人または組織。"
-            },
-            {
-                "chapter": "情報リテラシー・基本理念とAI社会原則",
-                "term": "AI提供者(AI Provider)",
-                "definition": "開発されたAIシステムやAIサービスを市場に提供する個人または組織。"
-            },
-            {
-                "chapter": "情報リテラシー・基本理念とAI社会原則",
-                "term": "AI利用者(AI Business User)",
-                "definition": "提供されたAIシステムやAIサービスを自身の業務や事業活動に利用する個人または組織。"
-            },
-            {
-                "chapter": "テキスト生成AIのプロンプト制作と実例",
                 "term": "LM (Language Model:言語モデル)",
-                "definition": "単語の並びの確率を学習し、次に来る単語を予測するモデル。自然言語処理の基本的な技術。"
+                "definition": "単語の並びの確率をモデル化し、自然言語の文法や意味を理解・生成するAIモデル。次の単語の予測などに使われる。",
+                "link": "https://ja.wikipedia.org/wiki/%E8%A8%80%E8%AA%9E%E3%83%A2%E3%83%87%E3%83%AB"
             },
             {
-                "chapter": "テキスト生成AIのプロンプト制作と実例",
+                "chapter": "情報リテラシー・基本理念とAI社会原則",
                 "term": "n-gramモデル",
-                "definition": "言語モデルの一種で、連続するn個の単語の出現確率に基づいて次の単語を予測する統計的なモデル。"
+                "definition": "言語モデルの一種で、ある単語が出現する確率を、その直前のn-1個の単語の並び（n-gram）に基づいて予測する統計的なモデル。",
+                "link": "https://ja.wikipedia.org/wiki/N%E3%82%B0%E3%83%A9%E3%83%A0"
             },
             {
-                "chapter": "テキスト生成AIのプロンプト制作と実例",
+                "chapter": "情報リテラシー・基本理念とAI社会原則",
                 "term": "ニューラル言語モデル",
-                "definition": "ニューラルネットワークを用いて単語の分散表現（埋め込み）を学習し、単語間の意味的関係を捉えることで、より高度な言語理解と生成を可能にするモデル。"
+                "definition": "ニューラルネットワークを用いて言語のパターンを学習し、単語の確率を予測する言語モデル。n-gramモデルよりも文脈の理解度が高い。",
+                "link": "https://ledge.ai/neural-language-model/"
             },
             {
-                "chapter": "テキスト生成AIのプロンプト制作と実例",
+                "chapter": "情報リテラシー・基本理念とAI社会原則",
                 "term": "LLM (Large Language Model:大規模言語モデル)",
-                "definition": "膨大な量のテキストデータで訓練された、数億から数兆ものパラメータを持つ大規模な言語モデル。自然な文章の生成や多様な言語タスクに対応できる。"
+                "definition": "Transformerアーキテクチャを基盤とし、大量のテキストデータで事前学習された、膨大な数のパラメータを持つ言語モデル。ChatGPTなどが該当する。",
+                "link": "https://ja.wikipedia.org/wiki/%E5%A4%A7%E8%A6%8F%E6%A8%A1%E8%A8%80%E8%AA%9E%E3%83%A2%E3%83%87%E3%83%AB"
             },
             {
-                "chapter": "テキスト生成AIのプロンプト制作と実例",
+                "chapter": "情報リテラシー・基本理念とAI社会原則",
                 "term": "プレトレーニング",
-                "definition": "LLMにおいて、大量の汎用的なテキストデータを用いて、事前にモデルに言語の基本的なパターンや知識を学習させること。"
+                "definition": "LLMにおいて、大量の汎用的なテキストデータを用いてモデルを事前に学習させるプロセス。これにより、モデルは言語の基本的な構造や知識を獲得する。",
+                "link": "https://ledge.ai/pretraining/"
             },
             {
-                "chapter": "テキスト生成AIのプロンプト制作と実例",
+                "chapter": "情報リテラシー・基本理念とAI社会原則",
                 "term": "ハイパーパラメータ",
-                "definition": "機械学習モデルの学習プロセスを制御するパラメータで、学習開始前に設定される。学習率やバッチサイズなどが該当する。"
+                "definition": "機械学習モデルの学習プロセスを制御するために、学習前に手動で設定されるパラメータ。学習率、バッチサイズ、エポック数などが該当する。",
+                "link": "https://ja.wikipedia.org/wiki/%E3%83%8F%E3%82%A4%E3%83%91%E3%83%BC%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF"
             },
             {
-                "chapter": "テキスト生成AIのプロンプト制作と実例",
+                "chapter": "情報リテラシー・基本理念とAI社会原則",
                 "term": "Temperature",
-                "definition": "LLMのテキスト生成において、出力のランダム性や多様性を調整するパラメータ。値が高いほど多様な、低いほど一般的なテキストが生成される。"
+                "definition": "LLMの生成において、出力のランダム性や多様性を調整するハイパーパラメータ。値が高いほど多様な出力になり、低いほど安定した出力になる。",
+                "link": "https://ledge.ai/temperature/"
             },
             {
-                "chapter": "テキスト生成AIのプロンプト制作と実例",
+                "chapter": "情報リテラシー・基本理念とAI社会原則",
                 "term": "Top-p",
-                "definition": "LLMのテキスト生成において、次に生成する単語の候補を絞り込むサンプリング手法の一つ。確率の高い単語から累積確率がpになるまでを選択する。"
+                "definition": "LLMの生成において、次に出現する単語の候補を確率が高いものから順に選び、累積確率がPを超えるまで選択するサンプリング手法。出力の多様性を制御する。",
+                "link": "https://ledge.ai/top-p/"
             },
             {
-                "chapter": "テキスト生成AIのプロンプト制作と実例",
+                "chapter": "情報リテラシー・基本理念とAI社会原則",
                 "term": "プロンプト",
-                "definition": "生成AIに対して、目的の出力（テキスト、画像など）を得るために与える指示や質問のテキスト。効果的なプロンプトの作成が重要。"
+                "definition": "AIモデル、特にLLMに対する入力指示。質問、命令、テキストの断片など、AIに特定の回答を引き出すために与える入力のこと。",
+                "link": "https://ja.wikipedia.org/wiki/%E3%83%97%E3%83%AD%E3%83%B3%E3%83%97%E3%83%88%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%E3%83%AA%E3%83%B3%E3%82%B0"
             },
             {
-                "chapter": "テキスト生成AIのプロンプト制作と実例",
+                "chapter": "情報リテラシー・基本理念とAI社会原則",
                 "term": "プロンプトエンジニアリング",
-                "definition": "生成AIから目的の出力を効率よく引き出すために、プロンプトを設計・最適化する技術や手法。"
+                "definition": "AIモデルから望ましい出力を得るために、効果的なプロンプト（指示）を設計・最適化する技術や手法。",
+                "link": "https://ja.wikipedia.org/wiki/%E3%83%97%E3%83%AD%E3%83%B3%E3%83%97%E3%83%88%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%E3%83%AA%E3%83%B3%E3%82%B0"
             },
             {
-                "chapter": "テキスト生成AIのプロンプト制作と実例",
+                "chapter": "情報リテラシー・基本理念とAI社会原則",
                 "term": "Instruction",
-                "definition": "プロンプトに含まれる、AIに実行してほしい具体的な指示。例：「～を要約してください」「～を生成してください」など。"
+                "definition": "プロンプトにおいて、AIに何をすべきかを具体的に伝える指示。例：「〇〇について説明してください」",
+                "link": "https://www.promptingguide.ai/jp/basics/elements"
             },
             {
-                "chapter": "テキスト生成AIのプロンプト制作と実例",
+                "chapter": "情報リテラシー・基本理念とAI社会原則",
                 "term": "Context",
-                "definition": "プロンプトに含まれる、AIが生成を行う上で参照すべき背景情報や文脈。例：「以下の文章を参考に」「この状況下で」など。"
+                "definition": "プロンプトにおいて、AIに出力を生成する上で考慮すべき背景情報や状況。これにより、AIはより適切で関連性の高い応答を生成できる。",
+                "link": "https://www.promptingguide.ai/jp/basics/elements"
             },
             {
-                "chapter": "テキスト生成AIのプロンプト制作と実例",
+                "chapter": "情報リテラシー・基本理念とAI社会原則",
                 "term": "Input Data",
-                "definition": "プロンプトに含まれる、AIが処理すべき具体的なデータ。例：「このテキストを校正してください」の場合の「このテキスト」。"
+                "definition": "プロンプトにおいて、AIが処理または参照すべき具体的なデータ。例：要約させたい文章、質問対象のデータ。",
+                "link": "https://www.promptingguide.ai/jp/basics/elements"
             },
             {
-                "chapter": "テキスト生成AIのプロンプト制作と実例",
+                "chapter": "情報リテラシー・基本理念とAI社会原則",
                 "term": "Output Indicator",
-                "definition": "プロンプトに含まれる、AIにどのような形式で出力してほしいかを示す指示。例：「箇条書きで」「〇〇の形式で出力」など。"
+                "definition": "プロンプトにおいて、AIに期待する出力形式や内容を示すヒントや指示。例：「箇条書きで回答してください」「〇〇という形式で出力」",
+                "link": "https://www.promptingguide.ai/jp/basics/elements"
             },
             {
-                "chapter": "テキスト生成AIのプロンプト制作と実例",
+                "chapter": "情報リテラシー・基本理念とAI社会原則",
                 "term": "Zero-Shot プロンプティング",
-                "definition": "プロンプトに具体的な例を示さずに、AIにタスクを実行させる手法。AIが事前学習で得た汎用的な知識を活用する。"
+                "definition": "AIモデルに事前の例示なしに、直接タスクの指示のみを与えて出力を生成させる手法。モデルの汎化能力を試す。",
+                "link": "https://www.promptingguide.ai/jp/techniques/zeroshot"
             },
             {
-                "chapter": "テキスト生成AIのプロンプト制作と実例",
+                "chapter": "情報リテラシー・基本理念とAI社会原則",
                 "term": "Few-Shot プロンプティング",
-                "definition": "プロンプトに少数の具体例（数ショット）を含めることで、AIにタスクの意図をより正確に伝え、性能を向上させる手法。"
+                "definition": "AIモデルに、タスクの指示とともに少数の入出力例を示すことで、そのタスクを学習させ、出力を生成させる手法。",
+                "link": "https://www.promptingguide.ai/jp/techniques/fewshot"
             }
         ];
 
@@ -1069,6 +1346,7 @@
             document.getElementById('chapterText').textContent = card.chapter;
             document.getElementById('termText').textContent = "\""+card.term+"\" とは？";
             document.getElementById('definitionText').textContent = card.definition;
+            document.getElementById('linkText').href = card.link;
             document.getElementById('currentCard').textContent = currentIndex + 1;
             document.getElementById('totalCards').textContent = shuffledCards.length;
             
