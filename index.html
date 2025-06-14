@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生成AIパスポート試験対策単語帳</title>
+    <style>
+        body {
+            font-family: 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: #4a5568;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .progress {
+            background: #e2e8f0;
+            height: 6px;
+            margin: 0 20px;
+        }
+        
+        .progress-bar {
+            background: #4299e1;
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+        
+        .card {
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px;
+            cursor: pointer;
+            position: relative;
+            background: #f7fafc;
+            transition: all 0.6s ease;
+        }
+        
+        .card.flipped {
+            background: #edf2f7;
+        }
+        
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            backface-visibility: hidden;
+            transition: transform 0.6s ease;
+        }
+        
+        .card-back {
+            transform: rotateY(180deg);
+        }
+        
+        .card.flipped .card-front {
+            transform: rotateY(180deg);
+        }
+        
+        .card.flipped .card-back {
+            transform: rotateY(0deg);
+        }
+        
+        .term {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .definition {
+            font-size: 1.4em;
+            color: #4a5568;
+            line-height: 1.6;
+            padding: 0 20px;
+        }
+        
+        .chapter {
+            font-size: 0.9em;
+            color: #718096;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        .controls {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f7fafc;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-primary {
+            background: #4299e1;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #3182ce;
+            transform: translateY(-1px);
+        }
+        
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+        
+        .btn-secondary:hover {
+            background: #cbd5e0;
+            transform: translateY(-1px);
+        }
+        
+        .counter {
+            font-size: 1.1em;
+            color: #4a5568;
+            font-weight: 500;
+        }
+        
+        .hint {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.9em;
+            color: #a0aec0;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>生成AIパスポート試験対策単語帳</h1>
+            <p>重要用語をマスターしよう</p>
+        </div>
+        
+        <div class="progress">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        
+        <div class="card" id="flashCard" onclick="flipCard()">
+            <div class="card-front">
+                <div class="chapter" id="chapterText"></div>
+                <div class="term" id="termText"></div>
+                <div class="hint">カードをクリックして説明を確認</div>
+            </div>
+            <div class="card-back">
+                <div class="definition" id="definitionText"></div>
+                <div class="hint">カードをクリックして単語に戻る</div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button class="btn btn-secondary" onclick="previousCard()">前の単語</button>
+            <div class="counter">
+                <span id="currentCard">1</span> / <span id="totalCards">0</span>
+            </div>
+            <button class="btn btn-primary" onclick="nextCard()">次の単語</button>
+        </div>
+    </div>
+
+    <script>
+        // 生成AIパスポート試験の用語データ
+        const flashcards = [
+            // 第1章 AI（人工知能）
+            { chapter: "第1章 AI（人工知能）", term: "AI（人工知能）", definition: "人間の知的活動を模倣・支援する技術の総称" },
+            { chapter: "第1章 AI（人工知能）", term: "AGI（汎用人工知能）", definition: "人間と同等以上の知的能力を持つ強いAI" },
+            { chapter: "第1章 AI（人工知能）", term: "ANI（特化型人工知能）", definition: "特定のタスクに特化した弱いAI" },
+            { chapter: "第1章 AI（人工知能）", term: "ダートマス会議", definition: "1956年にAI研究が始まった歴史的会議" },
+            { chapter: "第1章 AI（人工知能）", term: "ディープラーニング", definition: "多層ニューラルネットワークを用いた機械学習手法" },
+            { chapter: "第1章 AI（人工知能）", term: "ニューラルネットワーク", definition: "人間の脳の神経回路を模倣した計算モデル" },
+            { chapter: "第1章 AI（人工知能）", term: "機械学習", definition: "データから自動的にパターンを学習する技術" },
+            { chapter: "第1章 AI（人工知能）", term: "教師あり学習", definition: "正解データを用いて学習する機械学習手法" },
+            { chapter: "第1章 AI（人工知能）", term: "教師なし学習", definition: "正解データなしでパターンを発見する学習手法" },
+            { chapter: "第1章 AI（人工知能）", term: "強化学習", definition: "報酬を最大化するように行動を学習する手法" },
+            { chapter: "第1章 AI（人工知能）", term: "過学習", definition: "訓練データに特化しすぎて汎化性能が低下する現象" },
+            { chapter: "第1章 AI（人工知能）", term: "シンギュラリティ", definition: "AIが人間の知能を超越する技術的特異点" },
+            
+            // 第2章 生成AI（ジェネレーティブAI）
+            { chapter: "第2章 生成AI", term: "生成AI", definition: "新しいコンテンツを創造するAI技術" },
+            { chapter: "第2章 生成AI", term: "GAN", definition: "生成器と識別器が競争して学習する生成モデル" },
+            { chapter: "第2章 生成AI", term: "Transformerモデル", definition: "注意機構のみで構成された高性能言語モデル" },
+            { chapter: "第2章 生成AI", term: "Attention Mechanism", definition: "入力の重要な部分に注目する仕組み" },
+            { chapter: "第2章 生成AI", term: "BERTモデル", definition: "双方向の文脈を理解する言語モデル" },
+            { chapter: "第2章 生成AI", term: "GPTモデル", definition: "大規模な文章生成に特化した言語モデル" },
+            { chapter: "第2章 生成AI", term: "ChatGPT", definition: "OpenAIが開発した対話型AI" },
+            { chapter: "第2章 生成AI", term: "ハルシネーション", definition: "AIが事実と異なる情報を生成する現象" },
+            { chapter: "第2章 生成AI", term: "ファインチューニング", definition: "既存モデルを特定タスクに調整する手法" },
+            { chapter: "第2章 生成AI", term: "RLHF", definition: "人間のフィードバックを用いた強化学習" },
+            
+            // 第3章 現在の生成AIの動向
+            { chapter: "第3章 生成AIの動向", term: "画像生成AI", definition: "テキストから画像を生成するAI技術" },
+            { chapter: "第3章 生成AIの動向", term: "テキスト生成AI", definition: "文章を自動生成するAI技術" },
+            { chapter: "第3章 生成AIの動向", term: "音声生成AI", definition: "人工的な音声を合成するAI技術" },
+            { chapter: "第3章 生成AIの動向", term: "ディープフェイク", definition: "AIを用いて作成された偽の映像や音声" },
+            { chapter: "第3章 生成AIの動向", term: "データ拡張技術", definition: "既存データを変形して訓練データを増やす手法" },
+            
+            // 第4章 情報リテラシー・基本理念とAI社会原則
+            { chapter: "第4章 情報リテラシー", term: "情報リテラシー", definition: "情報を適切に収集・評価・活用する能力" },
+            { chapter: "第4章 情報リテラシー", term: "個人情報保護法", definition: "個人情報の適正な取り扱いを定めた法律" },
+            { chapter: "第4章 情報リテラシー", term: "著作権", definition: "創作物を保護する知的財産権" },
+            { chapter: "第4章 情報リテラシー", term: "肖像権", definition: "自分の容姿を無断で使用されない権利" },
+            { chapter: "第4章 情報リテラシー", term: "フィッシング詐欺", definition: "偽サイトで個人情報を盗む詐欺" },
+            { chapter: "第4章 情報リテラシー", term: "人間中心のAI社会原則", definition: "人間を第一に考えるAI社会の指針" },
+            { chapter: "第4章 情報リテラシー", term: "透明性の原則", definition: "AI利活用における透明性確保" },
+            { chapter: "第4章 情報リテラシー", term: "公平性の原則", definition: "AI利活用における公平性の重要性" },
+            
+            // 第5章 テキスト生成AIのプロンプト制作と実例
+            { chapter: "第5章 プロンプト制作", term: "LLM", definition: "大規模な言語モデル" },
+            { chapter: "第5章 プロンプト制作", term: "プロンプト", definition: "AIへの指示や質問文" },
+            { chapter: "第5章 プロンプト制作", term: "プロンプトエンジニアリング", definition: "効果的なプロンプト設計技術" },
+            { chapter: "第5章 プロンプト制作", term: "Few-Shotプロンプティング", definition: "少数の例を示して学習させる手法" },
+            { chapter: "第5章 プロンプト制作", term: "Zero-Shotプロンプティング", definition: "例を示さずに指示のみで実行する手法" },
+            { chapter: "第5章 プロンプト制作", term: "Temperature", definition: "生成の多様性を制御するパラメータ" },
+            { chapter: "第5章 プロンプト制作", term: "Context", definition: "プロンプトの文脈情報" }
+        ];
+
+        let currentIndex = 0;
+        let shuffledCards = [];
+        let isFlipped = false;
+
+        // カードをシャッフル
+        function shuffleCards() {
+            shuffledCards = [...flashcards];
+            for (let i = shuffledCards.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffledCards[i], shuffledCards[j]] = [shuffledCards[j], shuffledCards[i]];
+            }
+        }
+
+        // カードを表示
+        function displayCard() {
+            const card = shuffledCards[currentIndex];
+            document.getElementById('chapterText').textContent = card.chapter;
+            document.getElementById('termText').textContent = card.term;
+            document.getElementById('definitionText').textContent = card.definition;
+            document.getElementById('currentCard').textContent = currentIndex + 1;
+            document.getElementById('totalCards').textContent = shuffledCards.length;
+            
+            // プログレスバー更新
+            const progress = ((currentIndex + 1) / shuffledCards.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            
+            // カードをリセット
+            const flashCard = document.getElementById('flashCard');
+            flashCard.classList.remove('flipped');
+            isFlipped = false;
+        }
+
+        // カードをめくる
+        function flipCard() {
+            const flashCard = document.getElementById('flashCard');
+            flashCard.classList.toggle('flipped');
+            isFlipped = !isFlipped;
+        }
+
+        // 次のカード
+        function nextCard() {
+            if (currentIndex < shuffledCards.length - 1) {
+                currentIndex++;
+                displayCard();
+            } else {
+                alert('すべての単語を確認しました！お疲れ様でした。');
+            }
+        }
+
+        // 前のカード
+        function previousCard() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                displayCard();
+            }
+        }
+
+        // キーボードショートカット
+        document.addEventListener('keydown', function(event) {
+            switch(event.key) {
+                case ' ':
+                case 'Enter':
+                    event.preventDefault();
+                    flipCard();
+                    break;
+                case 'ArrowRight':
+                    event.preventDefault();
+                    nextCard();
+                    break;
+                case 'ArrowLeft':
+                    event.preventDefault();
+                    previousCard();
+                    break;
+            }
+        });
+
+        // 初期化
+        window.onload = function() {
+            shuffleCards();
+            displayCard();
+        }
+    </script>
+</body>
+</html>
