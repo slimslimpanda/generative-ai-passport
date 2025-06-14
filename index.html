@@ -268,7 +268,7 @@
         function displayCard() {
             const card = shuffledCards[currentIndex];
             document.getElementById('chapterText').textContent = card.chapter;
-            document.getElementById('termText').textContent = card.term;
+            document.getElementById('termText').textContent = "\""+card.term+"\" とは？";
             document.getElementById('definitionText').textContent = card.definition;
             document.getElementById('currentCard').textContent = currentIndex + 1;
             document.getElementById('totalCards').textContent = shuffledCards.length;
