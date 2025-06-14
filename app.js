@@ -52,7 +52,7 @@ const flashcards = [
     "chapter": "第1章 AI(人工知能)",
     "term": "次元削減",
     "definition": "データの特徴量を減らすことで、データの構造を保持しつつ、データの複雑さを低減する手法。可視化や計算コスト削減に役立つ。",
-    "link": "https://ja.wikipedia.org/wiki/%E6%AC%A1%E5%85%83%E5%89%8A%E6%B8%9B"
+    "link": "https://www.tech-teacher.jp/blog/dimension-reduction/"
   },
   {
     "chapter": "第1章 AI(人工知能)",
@@ -76,13 +76,13 @@ const flashcards = [
     "chapter": "第1章 AI(人工知能)",
     "term": "ニューロン",
     "definition": "神経細胞のこと。人工ニューラルネットワークにおける処理単位のモデル。",
-    "link": "https://ja.wikipedia.org/wiki/%E3%83%8B%E3%83%A5%E3%83%BC%E3%83%AD%E3%83%B3"
+    "link": "https://www.sbbit.jp/article/cont1/33345"
   },
   {
     "chapter": "第1章 AI(人工知能)",
     "term": "シナプス",
     "definition": "神経細胞間の接合部。人工ニューラルネットワークにおいて、ニューロン間の結合の強さ（重み）に相当する。",
-    "link": "https://ja.wikipedia.org/wiki/%E3%82%B7%E3%83%8A%E3%83%97%E3%82%B9"
+    "link": "https://zenn.dev/nekoallergy/articles/ml-basic-nn01"
   },
   {
     "chapter": "第1章 AI(人工知能)",
@@ -106,13 +106,13 @@ const flashcards = [
     "chapter": "第1章 AI(人工知能)",
     "term": "重み",
     "definition": "ニューラルネットワークにおいて、入力信号が次の層のニューロンに伝達される際の結合の強さを示す数値。学習によって調整される。",
-    "link": "https://ledge.ai/deep-learning-tips-and-tricks/"
+    "link": "https://kuraberuai.fioriera.co.jp/ai-glossary/weight/"
   },
   {
     "chapter": "第1章 AI(人工知能)",
     "term": "情報の重みづけ",
     "definition": "入力された情報に対して、その重要度に応じて異なる重み（係数）を乗じること。これにより、モデルは重要な情報に焦点を当てて学習できる。",
-    "link": "https://ledge.ai/deep-learning-tips-and-tricks/"
+    "link": "https://kuraberuai.fioriera.co.jp/ai-glossary/weight/"
   },
   {
     "chapter": "第1章 AI(人工知能)",
@@ -130,19 +130,19 @@ const flashcards = [
     "chapter": "第1章 AI(人工知能)",
     "term": "ドロップアウト",
     "definition": "ニューラルネットワークの過学習を防ぐための正則化手法の一つ。学習時にランダムに一部のニューロンを無効化することで、モデルの汎化能力を高める。",
-    "link": "https://ja.wikipedia.org/wiki/%E3%83%89%E3%83%AD%E3%83%83%E3%83%97%E3%82%A2%E3%82%A6%E3%83%88_(%E3%83%8B%E3%83%A5%E3%83%BC%E3%83%A9%E3%83%AB%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF)"
+    "link": "https://zero2one.jp/ai-word/dropout/"
   },
   {
     "chapter": "第1章 AI(人工知能)",
     "term": "転移学習",
     "definition": "あるタスクで学習済みのモデルを、別の関連するタスクに転用して学習させる手法。少ないデータで効率的に学習を進めることができる。",
-    "link": "https://ja.wikipedia.org/wiki/%E8%BB%A2%E7%A7%BB%E5%AD%A6%E7%BF%92"
+    "link": "https://udemy.benesse.co.jp/data-science/deep-learning/transfer-learning.html"
   },
   {
     "chapter": "第1章 AI(人工知能)",
     "term": "特徴量",
     "definition": "機械学習において、データが持つ特性や情報を数値で表現したもの。モデルの学習に用いられる入力データとなる。",
-    "link": "https://ja.wikipedia.org/wiki/%E7%89%B9%E5%BE%B4%E9%87%8F"
+    "link": "https://jpn.nec.com/solution/dotdata/tips/feature/index.html"
   },
   {
     "chapter": "第1章 AI(人工知能)",
@@ -160,7 +160,7 @@ const flashcards = [
     "chapter": "第1章 AI(人工知能)",
     "term": "第一次AIブーム",
     "definition": "1950年代後半から1960年代にかけてのAI研究の初期段階。探索や推論といった記号処理によるAIが中心であった。",
-    "link": "https://ledge.ai/ai-boom-history/"
+    "link": "https://www.soumu.go.jp/johotsusintokei/whitepaper/ja/h28/html/nc142120.html"
   },
   {
     "chapter": "第1章 AI(人工知能)",
@@ -178,7 +178,7 @@ const flashcards = [
     "chapter": "第1章 AI(人工知能)",
     "term": "第二次AIブーム",
     "definition": "1980年代に起こったAI研究のブーム。エキスパートシステムが中心となり、特定の分野で専門家のような知識を用いた問題解決が可能になった。",
-    "link": "https://ledge.ai/ai-boom-history/"
+    "link": "https://www.soumu.go.jp/johotsusintokei/whitepaper/ja/h28/html/nc142120.html"
   },
   {
     "chapter": "第1章 AI(人工知能)",
@@ -196,7 +196,7 @@ const flashcards = [
     "chapter": "第1章 AI(人工知能)",
     "term": "第三次AIブーム",
     "definition": "2000年代以降に起こったAI研究のブーム。ビッグデータ、計算能力の向上、ディープラーニングの発展により、AIが実用的な成果を上げ始めた。",
-    "link": "https://ledge.ai/ai-boom-history/"
+    "link": "https://www.soumu.go.jp/johotsusintokei/whitepaper/ja/h28/html/nc142120.html"
   },
   {
     "chapter": "第1章 AI(人工知能)",
@@ -274,7 +274,7 @@ const flashcards = [
     "chapter": "第2章 生成AI (ジェネレーティブAI)",
     "term": "VAE (変分自己符号化器)",
     "definition": "データの生成と潜在表現の学習を同時に行う生成モデルの一つ。エンコーダでデータを潜在空間に圧縮し、デコーダでその潜在表現からデータを再構築する。",
-    "link": "https://ja.wikipedia.org/wiki/%E5%A4%89%E5%88%86%E8%87%AA%E5%B7%B1%E7%AC%A6%E5%8F%B7%E5%8C%96%E5%99%A8"
+    "link": "https://jitera.com/ja/insights/34682"
   },
   {
     "chapter": "第2章 生成AI (ジェネレーティブAI)",
@@ -286,13 +286,13 @@ const flashcards = [
     "chapter": "第2章 生成AI (ジェネレーティブAI)",
     "term": "エンコーダ",
     "definition": "VAEの一部で、入力データをより低次元の潜在空間表現に変換（符号化）する役割を持つニューラルネットワーク。",
-    "link": "https://ja.wikipedia.org/wiki/%E3%82%A8%E3%83%B3%E3%82%B3%E3%83%BC%E3%83%80%E3%83%BC"
+    "link": "https://cvml-expertguide.net/terms/dl/encoder-decoder/"
   },
   {
     "chapter": "第2章 生成AI (ジェネレーティブAI)",
     "term": "デコーダ",
     "definition": "VAEの一部で、潜在空間表現から元のデータ形式に再構築（復号化）する役割を持つニューラルネットワーク。",
-    "link": "https://ja.wikipedia.org/wiki/%E3%83%87%E3%82%B3%E3%83%BC%E3%83%80%E3%83%BC"
+    "link": "https://cvml-expertguide.net/terms/dl/encoder-decoder/"
   },
   {
     "chapter": "第2章 生成AI (ジェネレーティブAI)",
