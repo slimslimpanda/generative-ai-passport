@@ -1215,7 +1215,8 @@ function displayCard() {
     document.getElementById('chapterText').textContent = card.chapter;
     document.getElementById('termText').textContent = "\""+card.term+"\" とは？";
     document.getElementById('definitionText').textContent = card.definition;
-    document.getElementById('linkText').href = card.link;
+    document.getElementById('linkText').src = card.link;
+    document.getElementById('linkTextA').href = card.link;
     document.getElementById('currentCard').textContent = currentIndex + 1;
     document.getElementById('totalCards').textContent = shuffledCards.length;
     
