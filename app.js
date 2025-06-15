@@ -652,7 +652,7 @@ const flashcards = [
     "chapter": "第4章 情報リテラシー・基本理念とAI社会原則",
     "term": "デジタル市民権",
     "definition": "デジタル社会において、個人が持つべき権利と責任。インターネットへのアクセス権、表現の自由、プライバシー保護、デジタル上の安全などが含まれる。",
-    "link": "https://e-words.jp/w/%E3%83%87%E3%82%B8%E3%82%BF%E3%83%AB%E5%B8%82%E6%B0%91%E6%A8%A9.html"
+    "link": "https://www.toolify.ai/ja/ai-news-jp/%E5%B8%82%E6%B0%91%E6%A8%A9%E9%87%8D%E8%A6%81%E6%80%A7%E5%B0%86%E6%9D%A5%E8%80%83%E5%AF%9F-1911278"
   },
   {
     "chapter": "第4章 情報リテラシー・基本理念とAI社会原則",
