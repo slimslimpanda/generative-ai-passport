@@ -16,7 +16,7 @@ const flashcards = [
     "chapter": "第1章 AI(人工知能)",
     "term": "ルールベース",
     "definition": "あらかじめ設定されたルールに基づいて意思決定や処理を行うシステム。条件と行動のペアで構成される。",
-    "link": "https://e-words.jp/w/%E3%83%AB%E3%83%BC%E3%83%AB%E3%83%99%E3%83%BC%E3%82%B9%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0.html"
+    "link": "https://www.ai-souken.com/article/rule-based-ai-other"
   },
   {
     "chapter": "第1章 AI(人工知能)",
@@ -682,7 +682,7 @@ const flashcards = [
     "chapter": "第4章 情報リテラシー・基本理念とAI社会原則",
     "term": "アンチウイルスソフトウェア",
     "definition": "コンピュータウイルスやその他のマルウェアの検出、除去、予防を行うソフトウェア。",
-    "link": "https://ja.wikipedia.org/wiki/%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E対策%E3%82%BD%E3%83%95%E3%83%88"
+    "link": "https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%B3%E3%83%81%E3%82%A6%E3%82%A4%E3%83%AB%E3%82%B9%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2"
   },
   {
     "chapter": "第4章 情報リテラシー・基本理念とAI社会原則",
